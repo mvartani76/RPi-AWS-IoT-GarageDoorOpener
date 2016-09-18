@@ -1,1 +1,0 @@
-IoT-Sample from AWS
