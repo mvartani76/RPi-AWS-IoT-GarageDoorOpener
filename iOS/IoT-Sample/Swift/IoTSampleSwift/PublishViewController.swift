@@ -20,6 +20,7 @@ class PublishViewController: UIViewController {
 
     @IBOutlet weak var publishSlider: UISlider!
 
+    @IBOutlet weak var publishButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -28,6 +29,15 @@ class PublishViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func ButtonPressed(sender: UIButton) {
+        
+        let iotDataManager = AWSIoTDataManager.defaultIoTDataManager()
+            
+        iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"TOGGLE\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.MessageDeliveryAttemptedAtMostOnce)
+    }
+        
+
     @IBAction func sliderValueChanged(sender: UISlider) {
         print("\(sender.value)")
 

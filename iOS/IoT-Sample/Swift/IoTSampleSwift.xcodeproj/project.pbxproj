@@ -123,12 +123,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6B39BC51BF3A93600045F73 /* Build configuration list for PBXNativeTarget "IoTSampleSwift" */;
 			buildPhases = (
-				DC1F7059CF8DC38C8DFA1A4A /* 📦 Check Pods Manifest.lock */,
+				DC1F7059CF8DC38C8DFA1A4A /* [CP] Check Pods Manifest.lock */,
 				A6B39BAD1BF3A93600045F73 /* Sources */,
 				A6B39BAE1BF3A93600045F73 /* Frameworks */,
 				A6B39BAF1BF3A93600045F73 /* Resources */,
-				75F7F940938971BA0FD2C49C /* 📦 Copy Pods Resources */,
-				4D1E2401B957BD82886A4683 /* 📦 Embed Pods Frameworks */,
+				75F7F940938971BA0FD2C49C /* [CP] Copy Pods Resources */,
+				4D1E2401B957BD82886A4683 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -150,6 +150,7 @@
 				TargetAttributes = {
 					A6B39BB01BF3A93600045F73 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = K79TKW9544;
 					};
 				};
 			};
@@ -185,14 +186,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4D1E2401B957BD82886A4683 /* 📦 Embed Pods Frameworks */ = {
+		4D1E2401B957BD82886A4683 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,14 +201,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IoTSampleSwift/Pods-IoTSampleSwift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		75F7F940938971BA0FD2C49C /* 📦 Copy Pods Resources */ = {
+		75F7F940938971BA0FD2C49C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,14 +216,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IoTSampleSwift/Pods-IoTSampleSwift-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DC1F7059CF8DC38C8DFA1A4A /* 📦 Check Pods Manifest.lock */ = {
+		DC1F7059CF8DC38C8DFA1A4A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

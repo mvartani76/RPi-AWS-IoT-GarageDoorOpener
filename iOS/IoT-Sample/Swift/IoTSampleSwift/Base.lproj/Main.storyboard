@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -85,16 +85,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bGP-dm-c7e" userLabel="Root Stack View">
-                                <rect key="frame" x="-48" y="250" width="560" height="531"/>
-                                <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="1" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="poC-3V-APO">
-                                        <rect key="frame" x="-2" y="0.0" width="564" height="532"/>
-                                        <connections>
-                                            <action selector="sliderValueChanged:" destination="8rJ-Kc-sve" eventType="valueChanged" id="LDZ-Hv-J5a"/>
-                                        </connections>
-                                    </slider>
-                                </subviews>
+                                <rect key="frame" x="20" y="109" width="560" height="428"/>
                             </stackView>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="1" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="poC-3V-APO">
+                                <rect key="frame" x="18" y="136" width="564" height="532"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="8rJ-Kc-sve" eventType="valueChanged" id="LDZ-Hv-J5a"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-iV-9bn">
+                                <rect key="frame" x="241" y="261" width="118" height="30"/>
+                                <state key="normal" title="Toggle Garage"/>
+                                <connections>
+                                    <action selector="ButtonPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="vwm-lZ-YcH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -106,12 +111,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Publish" image="second" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="publishButton" destination="o2G-iV-9bn" id="kUK-MY-3eq"/>
                         <outlet property="publishSlider" destination="poC-3V-APO" id="pmQ-hC-grP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="750" y="412"/>
         </scene>
         <!--Subscribe-->
         <scene sceneID="tzc-bh-gie">
@@ -149,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ic9-qs-F16" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="1150"/>
+            <point key="canvasLocation" x="498" y="1154"/>
         </scene>
         <!--IoT Sample Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -232,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BmK-vy-r30" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-44" y="867"/>
+            <point key="canvasLocation" x="-304" y="975"/>
         </scene>
     </scenes>
     <resources>
