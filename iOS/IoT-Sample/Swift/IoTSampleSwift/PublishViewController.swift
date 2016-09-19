@@ -21,6 +21,13 @@ class PublishViewController: UIViewController {
     @IBOutlet weak var publishSlider: UISlider!
 
     @IBOutlet weak var publishButton: UIButton!
+    
+    @IBOutlet weak var GarageON:
+        UIButton!
+    
+    @IBOutlet weak var GarageOFF:
+        UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -37,7 +44,18 @@ class PublishViewController: UIViewController {
         iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"TOGGLE\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.MessageDeliveryAttemptedAtMostOnce)
     }
         
+    @IBAction func ONGarageButtonPressed() {
+        
+        let iotDataManager = AWSIoTDataManager.defaultIoTDataManager()
+        iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"ON\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.MessageDeliveryAttemptedAtMostOnce)
+    }
 
+    @IBAction func OFFGarageButtonPressed() {
+        
+        let iotDataManager = AWSIoTDataManager.defaultIoTDataManager()
+        iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"OFF\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.MessageDeliveryAttemptedAtMostOnce)
+    }
+    
     @IBAction func sliderValueChanged(sender: UISlider) {
         print("\(sender.value)")
 

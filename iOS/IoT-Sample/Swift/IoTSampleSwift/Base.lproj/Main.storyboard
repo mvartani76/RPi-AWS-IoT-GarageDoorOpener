@@ -95,9 +95,23 @@
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-iV-9bn">
                                 <rect key="frame" x="241" y="261" width="118" height="30"/>
-                                <state key="normal" title="Toggle Garage"/>
+                                <state key="normal" title="TOGGLE Garage"/>
                                 <connections>
                                     <action selector="ButtonPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="vwm-lZ-YcH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8O-HX-hLS">
+                                <rect key="frame" x="259" y="223" width="82" height="30"/>
+                                <state key="normal" title="OFF Garage"/>
+                                <connections>
+                                    <action selector="OFFGarageButtonPressed" destination="8rJ-Kc-sve" eventType="touchUpInside" id="6xT-kv-OOa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCV-OG-e0a">
+                                <rect key="frame" x="262" y="185" width="76" height="30"/>
+                                <state key="normal" title="ON Garage"/>
+                                <connections>
+                                    <action selector="ONGarageButtonPressed" destination="8rJ-Kc-sve" eventType="touchUpInside" id="K4I-OW-Z7z"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -111,6 +125,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Publish" image="second" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="GarageOFF" destination="X8O-HX-hLS" id="aB9-xl-eWr"/>
+                        <outlet property="GarageON" destination="LCV-OG-e0a" id="GFf-Hv-GFK"/>
                         <outlet property="publishButton" destination="o2G-iV-9bn" id="kUK-MY-3eq"/>
                         <outlet property="publishSlider" destination="poC-3V-APO" id="pmQ-hC-grP"/>
                     </connections>
