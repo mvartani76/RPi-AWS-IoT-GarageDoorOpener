@@ -27,7 +27,7 @@
                                 <rect key="frame" x="36" y="191" width="343" height="418"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QCQ-ze-Hae">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYB-6h-fuP">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
@@ -37,12 +37,12 @@
                                                 </connections>
                                             </button>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="JlF-VM-7bv">
-                                                <rect key="frame" x="0.0" y="30" width="343" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="30" width="343" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
                                     </stackView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XBk-XW-Dn3">
-                                        <rect key="frame" x="0.0" y="30" width="343" height="388"/>
+                                        <rect key="frame" x="0.0" y="50" width="343" height="368"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -89,47 +89,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bGP-dm-c7e" userLabel="Root Stack View">
-                                <rect key="frame" x="16" y="109" width="343" height="428"/>
-                            </stackView>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="1" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="poC-3V-APO">
-                                <rect key="frame" x="18" y="136" width="564" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="sliderValueChanged:" destination="8rJ-Kc-sve" eventType="valueChanged" id="LDZ-Hv-J5a"/>
-                                </connections>
-                            </slider>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-iV-9bn">
-                                <rect key="frame" x="241" y="261" width="118" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="TOGGLE Garage"/>
-                                <connections>
-                                    <action selector="ButtonPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="vwm-lZ-YcH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8O-HX-hLS">
-                                <rect key="frame" x="259" y="223" width="82" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="OFF Garage"/>
-                                <connections>
-                                    <action selector="OFFGarageButtonPressed" destination="8rJ-Kc-sve" eventType="touchUpInside" id="6xT-kv-OOa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCV-OG-e0a">
-                                <rect key="frame" x="262" y="185" width="76" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="ON Garage"/>
-                                <connections>
-                                    <action selector="ONGarageButtonPressed" destination="8rJ-Kc-sve" eventType="touchUpInside" id="K4I-OW-Z7z"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z5P-K9-Kec" userLabel="PanelView">
+                                <rect key="frame" x="37.5" y="66" width="300" height="534"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bGP-dm-c7e" userLabel="Root Stack View">
+                                        <rect key="frame" x="0.0" y="186" width="300" height="162"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCV-OG-e0a">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" title="ON Garage"/>
+                                                <connections>
+                                                    <action selector="ONGarageButtonPressed" destination="8rJ-Kc-sve" eventType="touchUpInside" id="K4I-OW-Z7z"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8O-HX-hLS">
+                                                <rect key="frame" x="0.0" y="44" width="300" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" title="OFF Garage"/>
+                                                <connections>
+                                                    <action selector="OFFGarageButtonPressed" destination="8rJ-Kc-sve" eventType="touchUpInside" id="6xT-kv-OOa"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-iV-9bn" userLabel="GarageTOGGLE">
+                                                <rect key="frame" x="0.0" y="88" width="300" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" title="TOGGLE Garage"/>
+                                                <connections>
+                                                    <action selector="ButtonPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="vwm-lZ-YcH"/>
+                                                </connections>
+                                            </button>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="1" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="poC-3V-APO">
+                                                <rect key="frame" x="-2" y="132" width="304" height="31"/>
+                                                <connections>
+                                                    <action selector="sliderValueChanged:" destination="8rJ-Kc-sve" eventType="valueChanged" id="LDZ-Hv-J5a"/>
+                                                </connections>
+                                            </slider>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="bGP-dm-c7e" firstAttribute="width" secondItem="z5P-K9-Kec" secondAttribute="width" id="WdV-bX-okN"/>
+                                    <constraint firstItem="bGP-dm-c7e" firstAttribute="centerX" secondItem="z5P-K9-Kec" secondAttribute="centerX" id="Y9Z-JW-bpH"/>
+                                    <constraint firstItem="bGP-dm-c7e" firstAttribute="centerY" secondItem="z5P-K9-Kec" secondAttribute="centerY" id="noO-NN-RvQ"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bGP-dm-c7e" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="9Eg-GI-sUb"/>
-                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="bGP-dm-c7e" secondAttribute="bottom" id="Xfj-uX-1ZB"/>
-                            <constraint firstItem="bGP-dm-c7e" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="hYf-Pk-eYQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bGP-dm-c7e" secondAttribute="trailing" id="wcq-OE-SoF"/>
+                            <constraint firstItem="z5P-K9-Kec" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="OA0-pZ-Urd"/>
+                            <constraint firstItem="z5P-K9-Kec" firstAttribute="height" secondItem="QS5-Rx-YEW" secondAttribute="height" multiplier="0.8" id="cpF-5O-sAZ"/>
+                            <constraint firstItem="z5P-K9-Kec" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="hfF-QO-ezQ"/>
+                            <constraint firstItem="z5P-K9-Kec" firstAttribute="width" secondItem="QS5-Rx-YEW" secondAttribute="width" multiplier="0.8" id="iQE-Dr-HGb"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Publish" image="second" id="cPa-gy-q4n"/>
