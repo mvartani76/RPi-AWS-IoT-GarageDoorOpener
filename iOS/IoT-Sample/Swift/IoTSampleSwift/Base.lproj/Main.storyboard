@@ -23,48 +23,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="6Hr-Gc-Jct">
-                                <rect key="frame" x="36" y="191" width="343" height="418"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTb-5T-WHm" userLabel="PanelView">
+                                <rect key="frame" x="37" y="66" width="300" height="534"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QCQ-ze-Hae">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="6Hr-Gc-Jct">
+                                        <rect key="frame" x="0.0" y="239" width="300" height="56"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYB-6h-fuP">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
-                                                <state key="normal" title="Connect"/>
-                                                <connections>
-                                                    <action selector="connectButtonPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="AJv-12-N0h"/>
-                                                </connections>
-                                            </button>
-                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="JlF-VM-7bv">
-                                                <rect key="frame" x="0.0" y="30" width="343" height="20"/>
-                                            </activityIndicatorView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QCQ-ze-Hae">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="56"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYB-6h-fuP">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="36"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <state key="normal" title="Connect">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="connectButtonPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="AJv-12-N0h"/>
+                                                        </connections>
+                                                    </button>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="JlF-VM-7bv">
+                                                        <rect key="frame" x="0.0" y="36" width="300" height="20"/>
+                                                    </activityIndicatorView>
+                                                </subviews>
+                                            </stackView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XBk-XW-Dn3">
+                                                <rect key="frame" x="0.0" y="56" width="300" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="QCQ-ze-Hae" firstAttribute="centerY" secondItem="6Hr-Gc-Jct" secondAttribute="centerY" id="Ibp-wD-S1k"/>
+                                            <constraint firstItem="QCQ-ze-Hae" firstAttribute="width" secondItem="6Hr-Gc-Jct" secondAttribute="width" id="eas-lA-rOv"/>
+                                        </constraints>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XBk-XW-Dn3">
-                                        <rect key="frame" x="0.0" y="50" width="343" height="368"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="XBk-XW-Dn3" secondAttribute="trailing" id="9d9-PB-c82"/>
-                                    <constraint firstItem="XBk-XW-Dn3" firstAttribute="top" secondItem="QCQ-ze-Hae" secondAttribute="bottom" id="Hy7-K8-MMG"/>
-                                    <constraint firstItem="QCQ-ze-Hae" firstAttribute="top" secondItem="6Hr-Gc-Jct" secondAttribute="top" id="I5Y-Op-Af0"/>
-                                    <constraint firstItem="XBk-XW-Dn3" firstAttribute="leading" secondItem="6Hr-Gc-Jct" secondAttribute="leading" id="JeC-eT-M8d"/>
-                                    <constraint firstItem="QCQ-ze-Hae" firstAttribute="leading" secondItem="6Hr-Gc-Jct" secondAttribute="leading" id="RcW-mk-ntF"/>
-                                    <constraint firstAttribute="trailing" secondItem="QCQ-ze-Hae" secondAttribute="trailing" id="VXx-uq-QkY"/>
-                                    <constraint firstItem="XBk-XW-Dn3" firstAttribute="top" secondItem="QCQ-ze-Hae" secondAttribute="bottom" id="mpH-fL-quN"/>
-                                    <constraint firstAttribute="bottom" secondItem="XBk-XW-Dn3" secondAttribute="bottom" id="wVW-kC-sY9"/>
+                                    <constraint firstItem="6Hr-Gc-Jct" firstAttribute="centerX" secondItem="OTb-5T-WHm" secondAttribute="centerX" id="Dgq-yZ-EE9"/>
+                                    <constraint firstItem="6Hr-Gc-Jct" firstAttribute="width" secondItem="OTb-5T-WHm" secondAttribute="width" id="qLk-mf-MUm"/>
+                                    <constraint firstItem="6Hr-Gc-Jct" firstAttribute="centerY" secondItem="OTb-5T-WHm" secondAttribute="centerY" id="wpF-Lq-8yw"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="6Hr-Gc-Jct" secondAttribute="bottom" id="IpM-aR-JGE"/>
-                            <constraint firstItem="6Hr-Gc-Jct" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" multiplier="10" id="LZ9-Wd-a83"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6Hr-Gc-Jct" secondAttribute="trailing" id="M8M-QX-OPF"/>
-                            <constraint firstItem="6Hr-Gc-Jct" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="zQw-18-PNk"/>
+                            <constraint firstItem="OTb-5T-WHm" firstAttribute="height" secondItem="tsR-hK-woN" secondAttribute="height" multiplier="0.8" id="O8R-Z5-UK0"/>
+                            <constraint firstItem="OTb-5T-WHm" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="X5y-cG-7xj"/>
+                            <constraint firstItem="OTb-5T-WHm" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="fAg-fz-2KR"/>
+                            <constraint firstItem="OTb-5T-WHm" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" multiplier="0.8" id="qAS-Nr-Pvt"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Connection" image="first" id="acW-dT-cKf"/>
