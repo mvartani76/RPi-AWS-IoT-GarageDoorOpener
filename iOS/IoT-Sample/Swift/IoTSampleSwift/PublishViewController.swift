@@ -37,31 +37,31 @@ class PublishViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func ButtonPressed(sender: UIButton) {
+    @IBAction func ButtonPressed(_ sender: UIButton) {
         
-        let iotDataManager = AWSIoTDataManager.defaultIoTDataManager()
+        let iotDataManager = AWSIoTDataManager.default()
             
-        iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"TOGGLE\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.MessageDeliveryAttemptedAtMostOnce)
+        iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"TOGGLE\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
     }
         
     @IBAction func ONGarageButtonPressed() {
         
-        let iotDataManager = AWSIoTDataManager.defaultIoTDataManager()
-        iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"ON\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.MessageDeliveryAttemptedAtMostOnce)
+        let iotDataManager = AWSIoTDataManager.default()
+        iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"ON\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
     }
 
     @IBAction func OFFGarageButtonPressed() {
         
-        let iotDataManager = AWSIoTDataManager.defaultIoTDataManager()
-        iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"OFF\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.MessageDeliveryAttemptedAtMostOnce)
+        let iotDataManager = AWSIoTDataManager.default()
+        iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"OFF\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
     }
     
-    @IBAction func sliderValueChanged(sender: UISlider) {
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
         print("\(sender.value)")
 
-        let iotDataManager = AWSIoTDataManager.defaultIoTDataManager()
+        let iotDataManager = AWSIoTDataManager.default()
         let tabBarViewController = tabBarController as! IoTSampleTabBarController
 
-        iotDataManager.publishString("\(sender.value)", onTopic:tabBarViewController.topic, qoS:.MessageDeliveryAttemptedAtMostOnce)
+        iotDataManager?.publishString("\(sender.value)", onTopic:tabBarViewController.topic, qoS:.messageDeliveryAttemptedAtMostOnce)
     }
 }
