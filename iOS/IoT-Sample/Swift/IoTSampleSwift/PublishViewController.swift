@@ -15,26 +15,61 @@
 
 import UIKit
 import AWSIoT
+import CoreLocation
 
-class PublishViewController: UIViewController {
+class PublishViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var publishSlider: UISlider!
-
     @IBOutlet weak var publishButton: UIButton!
+    @IBOutlet weak var GarageON: UIButton!
+    @IBOutlet weak var GarageOFF: UIButton!
     
-    @IBOutlet weak var GarageON:
-        UIButton!
+    let locationManager = CLLocationManager()
     
-    @IBOutlet weak var GarageOFF:
-        UIButton!
+    let homeLocation: CLLocation = CLLocation(latitude: 42.572215, longitude: -83.488498)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error) -> Void in
+            
+            if (error != nil) {
+                print("ERROR:" + (error?.localizedDescription)!)
+            }
+            else if (placemarks?.count)! > 0 {
+                let pm = (placemarks?[0])! as CLPlacemark
+                self.displayLocationInfo(placemark: pm)
+            }
+            else {
+                print("Error with Data")
+            }
+            self.locationManager.stopUpdatingLocation()
+        })
+    }
+    
+    func displayLocationInfo(placemark: CLPlacemark) {
+        
+        print(placemark.locality)
+        print(placemark.postalCode)
+        print(placemark.administrativeArea)
+        print(placemark.country)
+        print(placemark.location)
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: Error) {
+        print("Error:" + error.localizedDescription)
     }
     
     @IBAction func ButtonPressed(_ sender: UIButton) {
@@ -43,8 +78,14 @@ class PublishViewController: UIViewController {
             
         iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"TOGGLE\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
     }
-        
+    
     @IBAction func ONGarageButtonPressed() {
+        self.locationManager.startUpdatingLocation()
+        print(locationManager.location?.coordinate.latitude as Any)
+        print(locationManager.location?.coordinate.longitude as Any)
+        
+        
+        print("Distance is \(locationManager.location?.distance(from: homeLocation)) m")
         
         let iotDataManager = AWSIoTDataManager.default()
         iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"ON\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
