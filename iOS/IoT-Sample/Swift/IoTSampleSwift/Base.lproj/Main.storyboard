@@ -100,33 +100,39 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z5P-K9-Kec" userLabel="PanelView">
                                 <rect key="frame" x="37.5" y="66" width="300" height="534"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bGP-dm-c7e" userLabel="Root Stack View">
-                                        <rect key="frame" x="0.0" y="230" width="300" height="74"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-iV-9bn" userLabel="GarageTOGGLE">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="Open/Shut Garage">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="wasGarageTOGGLEButtonPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="r9t-81-3BE"/>
-                                                </connections>
-                                            </button>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="1" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="poC-3V-APO">
-                                                <rect key="frame" x="-2" y="44" width="304" height="31"/>
-                                                <connections>
-                                                    <action selector="sliderValueChanged:" destination="8rJ-Kc-sve" eventType="valueChanged" id="LDZ-Hv-J5a"/>
-                                                </connections>
-                                            </slider>
-                                        </subviews>
-                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-iV-9bn" userLabel="GarageTOGGLE">
+                                        <rect key="frame" x="49.5" y="229.5" width="200" height="75"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="by9-bH-5e8"/>
+                                            <constraint firstAttribute="width" constant="200" id="dIv-Sv-DKB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Open/Shut Garage">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="wasGarageTOGGLEButtonPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="r9t-81-3BE"/>
+                                        </connections>
+                                    </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="1" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="poC-3V-APO">
+                                        <rect key="frame" x="-3" y="339" width="304" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="sliderValueChanged:" destination="8rJ-Kc-sve" eventType="valueChanged" id="LDZ-Hv-J5a"/>
+                                        </connections>
+                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="bGP-dm-c7e" firstAttribute="width" secondItem="z5P-K9-Kec" secondAttribute="width" id="WdV-bX-okN"/>
-                                    <constraint firstItem="bGP-dm-c7e" firstAttribute="centerX" secondItem="z5P-K9-Kec" secondAttribute="centerX" id="Y9Z-JW-bpH"/>
-                                    <constraint firstItem="bGP-dm-c7e" firstAttribute="centerY" secondItem="z5P-K9-Kec" secondAttribute="centerY" id="noO-NN-RvQ"/>
+                                    <constraint firstItem="o2G-iV-9bn" firstAttribute="centerX" secondItem="z5P-K9-Kec" secondAttribute="centerX" id="2k9-50-cjD"/>
+                                    <constraint firstItem="o2G-iV-9bn" firstAttribute="centerY" secondItem="z5P-K9-Kec" secondAttribute="centerY" id="Yv6-YL-fnN"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -146,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="412"/>
+            <point key="canvasLocation" x="749.60000000000002" y="411.544227886057"/>
         </scene>
         <!--Subscribe-->
         <scene sceneID="tzc-bh-gie">
