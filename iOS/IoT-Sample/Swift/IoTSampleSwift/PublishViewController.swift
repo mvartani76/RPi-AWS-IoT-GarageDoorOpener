@@ -73,28 +73,38 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func ButtonPressed(_ sender: UIButton) {
+        self.locationManager.startUpdatingLocation()
         
-        let iotDataManager = AWSIoTDataManager.default()
-            
-        iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"TOGGLE\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+        guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
+        
+        if distanceToHome < 200 {
+        
+            let iotDataManager = AWSIoTDataManager.default()
+            iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"TOGGLE\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+        }
     }
     
     @IBAction func ONGarageButtonPressed() {
         self.locationManager.startUpdatingLocation()
-        print(locationManager.location?.coordinate.latitude as Any)
-        print(locationManager.location?.coordinate.longitude as Any)
         
+        guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
         
-        print("Distance is \(locationManager.location?.distance(from: homeLocation)) m")
+        if distanceToHome < 200 {
         
-        let iotDataManager = AWSIoTDataManager.default()
-        iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"ON\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+            let iotDataManager = AWSIoTDataManager.default()
+            iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"ON\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+        }
     }
 
     @IBAction func OFFGarageButtonPressed() {
+        self.locationManager.startUpdatingLocation()
         
-        let iotDataManager = AWSIoTDataManager.default()
-        iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"OFF\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+        guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
+        
+        if distanceToHome < 200 {
+            let iotDataManager = AWSIoTDataManager.default()
+            iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"OFF\",\"GPIO\":17}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+        }
     }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
