@@ -20,9 +20,8 @@ import CoreLocation
 class PublishViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var publishSlider: UISlider!
-    @IBOutlet weak var publishButton: UIButton!
-    @IBOutlet weak var GarageON: UIButton!
-    @IBOutlet weak var GarageOFF: UIButton!
+    @IBOutlet weak var garageTOGGLE: UIButton!
+
     
     let locationManager = CLLocationManager()
     
@@ -40,24 +39,13 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func ButtonPressed(_ sender: UIButton) {
+
+    @IBAction func wasGarageTOGGLEButtonPressed(_ sender: UIButton) {
         self.locationManager.startUpdatingLocation()
         
         sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: 17, homeDistanceThresh: homeDistanceThresh)
     }
     
-    @IBAction func ONGarageButtonPressed() {
-        self.locationManager.startUpdatingLocation()
-
-        sendPublishStringCommandWith(buttonState: "ON", gpioNum: 17, homeDistanceThresh: homeDistanceThresh)
-    }
-
-    @IBAction func OFFGarageButtonPressed() {
-        self.locationManager.startUpdatingLocation()
-        
-        sendPublishStringCommandWith(buttonState: "OFF", gpioNum: 17, homeDistanceThresh: homeDistanceThresh)
-    }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         print("\(sender.value)")
