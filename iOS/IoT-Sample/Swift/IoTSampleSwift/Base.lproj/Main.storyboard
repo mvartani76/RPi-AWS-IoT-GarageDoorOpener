@@ -98,10 +98,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z5P-K9-Kec" userLabel="PanelView">
-                                <rect key="frame" x="37.5" y="66" width="300" height="534"/>
+                                <rect key="frame" x="38" y="66" width="300" height="534"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-iV-9bn" userLabel="GarageTOGGLE">
-                                        <rect key="frame" x="49.5" y="229.5" width="200" height="75"/>
+                                        <rect key="frame" x="50" y="230" width="200" height="75"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="by9-bH-5e8"/>
@@ -128,11 +128,20 @@
                                             <action selector="sliderValueChanged:" destination="8rJ-Kc-sve" eventType="valueChanged" id="LDZ-Hv-J5a"/>
                                         </connections>
                                     </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jF-ET-7nl">
+                                        <rect key="frame" x="70" y="434" width="160" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="0jF-ET-7nl" firstAttribute="centerX" secondItem="z5P-K9-Kec" secondAttribute="centerX" id="0Oy-6c-L2M"/>
                                     <constraint firstItem="o2G-iV-9bn" firstAttribute="centerX" secondItem="z5P-K9-Kec" secondAttribute="centerX" id="2k9-50-cjD"/>
+                                    <constraint firstItem="0jF-ET-7nl" firstAttribute="width" secondItem="o2G-iV-9bn" secondAttribute="width" multiplier="0.8" id="YN2-1R-vp7"/>
                                     <constraint firstItem="o2G-iV-9bn" firstAttribute="centerY" secondItem="z5P-K9-Kec" secondAttribute="centerY" id="Yv6-YL-fnN"/>
+                                    <constraint firstAttribute="bottom" secondItem="0jF-ET-7nl" secondAttribute="bottom" constant="100" id="Z7W-rH-x31"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -148,6 +157,7 @@
                     <connections>
                         <outlet property="garageTOGGLE" destination="o2G-iV-9bn" id="Ypx-l3-xLS"/>
                         <outlet property="publishSlider" destination="poC-3V-APO" id="pmQ-hC-grP"/>
+                        <outlet property="statusLabel" destination="0jF-ET-7nl" id="nO7-NA-ABA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

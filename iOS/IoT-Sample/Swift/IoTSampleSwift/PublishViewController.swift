@@ -21,6 +21,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var publishSlider: UISlider!
     @IBOutlet weak var garageTOGGLE: UIButton!
+    @IBOutlet weak var statusLabel: UILabel!
 
     
     let locationManager = CLLocationManager()
@@ -43,7 +44,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func wasGarageTOGGLEButtonPressed(_ sender: UIButton) {
         self.locationManager.startUpdatingLocation()
         
-        sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: 17, homeDistanceThresh: homeDistanceThresh)
+        sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: 17, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
     }
     
     
@@ -56,13 +57,17 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         iotDataManager?.publishString("\(sender.value)", onTopic:tabBarViewController.topic, qoS:.messageDeliveryAttemptedAtMostOnce)
     }
     
-    func sendPublishStringCommandWith(buttonState: String, gpioNum: Int, homeDistanceThresh: Double) {
+    func sendPublishStringCommandWith(buttonState: String, gpioNum: Int, homeDistanceThresh: Double, indicatorLabel: UILabel) {
         
         guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
         
         if distanceToHome < homeDistanceThresh {
             let iotDataManager = AWSIoTDataManager.default()
             iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+            indicatorLabel.text = "Within Distance Threshold, passed \(buttonState) to \(gpioNum)"
+        }
+        else {
+            indicatorLabel.text = "Outside of Distance Threshold. Garage command not sent."
         }
     }
     
