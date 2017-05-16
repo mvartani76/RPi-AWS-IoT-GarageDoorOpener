@@ -29,6 +29,8 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     let homeLocation: CLLocation = CLLocation(latitude: 42.572215, longitude: -83.488498)
     let homeDistanceThresh: Double = 200.0
     
+    var timer = Timer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.locationManager.delegate = self
@@ -70,6 +72,12 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         else {
             indicatorLabel.text = "Outside of Distance Threshold. Garage command not sent."
         }
+        
+        timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
+    }
+    
+    @objc func clearIndicatorLabel() {
+        statusLabel.text = ""
     }
     
 }
