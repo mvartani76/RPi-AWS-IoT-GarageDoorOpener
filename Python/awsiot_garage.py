@@ -19,7 +19,8 @@ import time
 def setup_GPIO():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
-	GPIO.setup(17,GPIO.OUT)
+	GPIO.setup(16,GPIO.OUT)
+	GPIO.setup(27,GPIO.OUT)
 
 def on_connect(client, userdata, flags, rc):
     print("Connection returned result: " + str(rc) )
@@ -58,7 +59,7 @@ mqttc.on_message = on_message
 #mqttc.on_log = on_log
 
 # Insert AWS host information that is given when creating Resource
-awshost = "data.iot.us-east-1.amazonaws.com"
+awshost = "a29rk36c5id4bi.iot.us-east-1.amazonaws.com"
 awsport = 8883
 clientId = "GarageDoorOpener"
 thingName = "GarageDoorOpener"
