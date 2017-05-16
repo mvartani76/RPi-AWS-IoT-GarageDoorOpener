@@ -19,7 +19,7 @@ import time
 def setup_GPIO():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
-	GPIO.setup(16,GPIO.OUT)
+	GPIO.setup(17,GPIO.OUT)
 	GPIO.setup(27,GPIO.OUT)
 
 def on_connect(client, userdata, flags, rc):
