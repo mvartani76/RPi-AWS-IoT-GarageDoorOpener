@@ -168,6 +168,11 @@
                                     <constraint firstItem="VdI-3D-xHN" firstAttribute="centerY" secondItem="z5P-K9-Kec" secondAttribute="centerY" id="kUc-dD-gLo"/>
                                     <constraint firstItem="VdI-3D-xHN" firstAttribute="width" secondItem="z5P-K9-Kec" secondAttribute="width" multiplier="0.75" id="pAm-6d-4VZ"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
