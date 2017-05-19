@@ -23,6 +23,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var garage1TOGGLE: UIButton!
     @IBOutlet weak var garage2TOGGLE: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var PanelView: UIView!
     
     let locationManager = CLLocationManager()
     
@@ -36,8 +37,18 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
+        
+        // Set the BackgroundColor of PanelView based on distance to home location
+        setBackgroundColorBasedOnDistance()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set the BackgroundColor of PanelView based on distance to home location
+        setBackgroundColorBasedOnDistance()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,4 +91,17 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         statusLabel.text = ""
     }
     
+    func setBackgroundColorBasedOnDistance() {
+        self.locationManager.startUpdatingLocation()
+        guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
+        self.locationManager.stopUpdatingLocation()
+        
+        statusLabel.text = "Distance to Home = \(round(distanceToHome*10)/10) meters"
+        if distanceToHome > homeDistanceThresh {
+            PanelView.backgroundColor = UIColor(red: CGFloat(255/255.0), green: CGFloat(153/255.0), blue: CGFloat(204/255.0), alpha: CGFloat(1.0))
+        }
+        else {
+            PanelView.backgroundColor = UIColor.lightGray
+        }
+    }
 }
