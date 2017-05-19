@@ -185,6 +185,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Publish" image="second" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="PanelView" destination="z5P-K9-Kec" id="3eN-Hu-eha"/>
                         <outlet property="garage1TOGGLE" destination="o2G-iV-9bn" id="PN5-xu-GP3"/>
                         <outlet property="garage2TOGGLE" destination="TW8-Vs-Sea" id="eWO-ny-eSH"/>
                         <outlet property="statusLabel" destination="0jF-ET-7nl" id="nO7-NA-ABA"/>
