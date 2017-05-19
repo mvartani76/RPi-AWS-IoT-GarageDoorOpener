@@ -18,26 +18,26 @@ import AWSIoT
 
 class SubscribeViewController: UIViewController {
 
-    @IBOutlet weak var subscribeSlider: UISlider!
+    @IBOutlet weak var topicLabel: UILabel!
+    @IBOutlet weak var textView: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view, typically from a nib.
-        subscribeSlider.isEnabled = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
         let iotDataManager = AWSIoTDataManager.default()
         let tabBarViewController = tabBarController as! IoTSampleTabBarController
-
+        
+        self.topicLabel.text = "Topic: \(tabBarViewController.topic)"
+        
         iotDataManager?.subscribe(toTopic: tabBarViewController.topic, qoS: .messageDeliveryAttemptedAtMostOnce, messageCallback: {
             (payload) ->Void in
             let stringValue = NSString(data: payload!, encoding: String.Encoding.utf8.rawValue)!
 
             print("received: \(stringValue)")
             DispatchQueue.main.async {
-                self.subscribeSlider.value = stringValue.floatValue
+                self.textView.text = stringValue as String
             }
         } )
     }
