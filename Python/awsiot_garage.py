@@ -19,8 +19,9 @@ import time
 def setup_GPIO():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
-	GPIO.setup(17,GPIO.OUT)
-	GPIO.setup(27,GPIO.OUT)
+	GPIO.setup(17,GPIO.OUT, initial=True)
+	GPIO.setup(27,GPIO.OUT, initial=True)
+	GPIO.output(17,GPIO.HIGH)
 
 def on_connect(client, userdata, flags, rc):
     print("Connection returned result: " + str(rc) )
@@ -29,9 +30,17 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("#" , 1 )
 
 def on_message(client, userdata, msg):
+	global InitialGPIOSetup
 	print("topic: "+msg.topic)
 	print("payload: "+str(msg.payload))
 	if msg.topic == "Garage":
+		# Setup the GPIO pins the first time one attempts to open/close garage
+		# This resolves a previous issue where the power cycle caused the GPIOs
+		# to go from HIGH to LOW --> end result is that garage opens/closes when
+		# the power cycles
+		if InitialGPIOSetup == True:
+			setup_GPIO()
+			InitialGPIOSetup = False
 		json_msg = json.loads(msg.payload.decode())
 		print json_msg["state"]["reported"]["ON_OFF"]
 		if json_msg["state"]["reported"]["ON_OFF"] == "ON":
@@ -42,24 +51,20 @@ def on_message(client, userdata, msg):
 			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.LOW)
 		elif json_msg["state"]["reported"]["ON_OFF"] == "TOGGLE":
 			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.LOW)
-			time.sleep(0.5)
-			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.HIGH)
-			time.sleep(0.5)
-			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.LOW)
-			time.sleep(0.5)
+			time.sleep(0.2)
 			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.HIGH)
 
 #def on_log(client, userdata, level, msg):
 #    print(msg.topic+" "+str(msg.payload))
 
-setup_GPIO()
+InitialGPIOSetup = True
 mqttc = paho.Client()
 mqttc.on_connect = on_connect
 mqttc.on_message = on_message
 #mqttc.on_log = on_log
 
 # Insert AWS host information that is given when creating Resource
-awshost = "a29rk36c5id4bi.iot.us-east-1.amazonaws.com"
+awshost = "data.iot.us-east-1.amazonaws.com"
 awsport = 8883
 clientId = "GarageDoorOpener"
 thingName = "GarageDoorOpener"
