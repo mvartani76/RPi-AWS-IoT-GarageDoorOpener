@@ -21,6 +21,7 @@ def setup_GPIO():
 	GPIO.setwarnings(False)
 	GPIO.setup(17,GPIO.OUT, initial=True)
 	GPIO.setup(27,GPIO.OUT, initial=True)
+	GPIO.setup(18,GPIO.IN)
 	GPIO.output(17,GPIO.HIGH)
 
 def on_connect(client, userdata, flags, rc):
@@ -53,6 +54,13 @@ def on_message(client, userdata, msg):
 			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.LOW)
 			time.sleep(0.2)
 			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.HIGH)
+		elif json_msg["state"]["reported"]["ON_OFF"] == "REQUEST_STATUS":
+			print "GETTING STATUS"
+			garagestatus = GPIO.input(json_msg["state"]["reported"]["GPIO"])
+			if garagestatus == 1:
+				client.publish("Garage","{\"state\":{\"reported\":{\"ON_OFF\":\"UPDATE_STATUS\",\"DATA\":\"SHUT\"}}}")
+			else:
+				client.publish("Garage","{\"state\":{\"reported\":{\"ON_OFF\":\"UPDATE_STATUS\",\"DATA\":\"OPEN\"}}}")
 
 #def on_log(client, userdata, level, msg):
 #    print(msg.topic+" "+str(msg.payload))
