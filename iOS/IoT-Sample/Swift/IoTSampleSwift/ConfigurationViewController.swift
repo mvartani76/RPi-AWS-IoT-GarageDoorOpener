@@ -63,7 +63,7 @@ class ConfigurationViewController: UIViewController, UITextFieldDelegate {
                     if let exception = task.exception {
                         print("failed: [\(exception)]")
                     }
-                    print("result: [\(task.result)]")
+                    print("result: [\(String(describing: task.result))]")
                     if (task.exception == nil && task.error == nil)
                     {
                         //
@@ -82,7 +82,7 @@ class ConfigurationViewController: UIViewController, UITextFieldDelegate {
                             if let exception = task.exception {
                                 print("failed: [\(exception)]")
                             }
-                            print("result: [\(task.result)]")
+                            print("result: [\(String(describing: task.result))]")
                             if (task.exception == nil && task.error == nil)
                             {
                                 //
@@ -99,7 +99,7 @@ class ConfigurationViewController: UIViewController, UITextFieldDelegate {
                                     if let exception = task.exception {
                                         print("failed: [\(exception)]")
                                     }
-                                    print("result: [\(task.result)]")
+                                    print("result: [\(String(describing: task.result))]")
                                     if (task.exception == nil && task.error == nil)
                                     {
                                         //
