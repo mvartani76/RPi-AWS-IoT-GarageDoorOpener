@@ -162,7 +162,7 @@ class ConnectionViewController: UIViewController, UITextViewDelegate {
                             defaults.set(response?.certificateId, forKey:"certificateId")
                             defaults.set(response?.certificateArn, forKey:"certificateArn")
                             certificateId = response?.certificateId
-                            print("response: [\(response)]")
+                            print("response: [\(String(describing: response))]")
 
                             let attachPrincipalPolicyRequest = AWSIoTAttachPrincipalPolicyRequest()
                             attachPrincipalPolicyRequest?.policyName = PolicyName
@@ -177,7 +177,7 @@ class ConnectionViewController: UIViewController, UITextViewDelegate {
                                 if let exception = task.exception {
                                     print("failed: [\(exception)]")
                                 }
-                                print("result: [\(task.result)]")
+                                print("result: [\(String(describing: task.result))]")
                                 //
                                 // Connect to the AWS IoT platform
                                 //

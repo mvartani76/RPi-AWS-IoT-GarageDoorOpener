@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We want to give you diagnostics for where you are</string>
+	<key>NSLocationUsageDescription</key>
+	<string></string>
 	<key>CFBundleDisplayName</key>
 	<string>mygarageapp</string>
 	<key>CFBundleExecutable</key>

@@ -17,11 +17,17 @@ import UIKit
 import AWSIoT
 import CoreLocation
 
+enum SerializationError: Error {
+    case missing(String)
+    case invalid(String, Any)
+}
+
 class PublishViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var publishSlider: UISlider!
     @IBOutlet weak var garage1TOGGLE: UIButton!
     @IBOutlet weak var garage2TOGGLE: UIButton!
+    @IBOutlet weak var requestSTATUS: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var PanelView: UIView!
     
@@ -34,9 +40,38 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let iotDataManager = AWSIoTDataManager.default()
+        let tabBarViewController = tabBarController as! IoTSampleTabBarController
+        
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
+
+        iotDataManager?.subscribe(toTopic: tabBarViewController.topic, qoS: .messageDeliveryAttemptedAtMostOnce, messageCallback: {
+            (payload) ->Void in
+            let stringValue = String(describing: NSString(data: payload!, encoding: String.Encoding.utf8.rawValue)!)
+
+            let data = stringValue.data(using: .utf8)!
+            do {
+
+                if let jsonArray = try JSONSerialization.jsonObject(with: data, options :.mutableContainers) as? [String:Any]
+                {
+                    let jsonState = jsonArray["state"] as! [String:Any]
+                    let reportedState = jsonState["reported"] as! [String:Any]
+                    let msgState = reportedState["ON_OFF"] as! String
+
+                    if msgState == "UPDATE_STATUS" {
+                        let garageState = reportedState["DATA"] as! String
+                        self.statusLabel.text = garageState
+                    }
+                } else {
+                    print("bad json")
+                }
+            } catch let error as NSError {
+                print(error)
+            }
+        } )
         
         // Set the BackgroundColor of PanelView based on distance to home location
         setBackgroundColorBasedOnDistance()
@@ -61,6 +96,11 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func wasGarageTOGGLEButton2Pressed(_ sender: UIButton) {
         sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: 27, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
     }
+    
+    @IBAction func wasRequestSTATUSButtonPressed(_ sender: UIButton) {
+        sendPublishStringCommandWith(buttonState: "REQUEST_STATUS", gpioNum: 18, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
+    }
+    
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         print("\(sender.value)")
