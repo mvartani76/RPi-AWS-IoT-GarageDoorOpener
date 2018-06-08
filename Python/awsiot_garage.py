@@ -43,7 +43,6 @@ def on_message(client, userdata, msg):
 			setup_GPIO()
 			InitialGPIOSetup = False
 		json_msg = json.loads(msg.payload.decode())
-		print json_msg["state"]["reported"]["ON_OFF"]
 		if json_msg["state"]["reported"]["ON_OFF"] == "ON":
 			print "GPIO HIGH"
 			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.HIGH)
@@ -56,9 +55,7 @@ def on_message(client, userdata, msg):
 			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.HIGH)
 		elif json_msg["state"]["reported"]["ON_OFF"] == "REQUEST_STATUS":
 			print "GETTING STATUS"
-			print json_msg["state"]["reported"]["GPIO"]
 			garagestatus = GPIO.input(int(json_msg["state"]["reported"]["GPIO"]))
-			print garagestatus
 			if garagestatus == 1:
 				client.publish("Garage","{\"state\":{\"reported\":{\"ON_OFF\":\"UPDATE_STATUS\",\"DATA\":\"SHUT\"}}}")
 			else:
