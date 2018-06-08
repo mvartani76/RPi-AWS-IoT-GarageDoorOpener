@@ -56,7 +56,7 @@ def on_message(client, userdata, msg):
 			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.HIGH)
 		elif json_msg["state"]["reported"]["ON_OFF"] == "REQUEST_STATUS":
 			print "GETTING STATUS"
-			garagestatus = GPIO.input(json_msg["state"]["reported"]["GPIO"])
+			garagestatus = GPIO.input(int(json_msg["state"]["reported"]["GPIO"]))
 			if garagestatus == 1:
 				client.publish("Garage","{\"state\":{\"reported\":{\"ON_OFF\":\"UPDATE_STATUS\",\"DATA\":\"SHUT\"}}}")
 			else:
