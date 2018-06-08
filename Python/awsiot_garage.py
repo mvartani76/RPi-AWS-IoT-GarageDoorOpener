@@ -21,7 +21,7 @@ def setup_GPIO():
 	GPIO.setwarnings(False)
 	GPIO.setup(17,GPIO.OUT, initial=True)
 	GPIO.setup(27,GPIO.OUT, initial=True)
-	GPIO.setup(18,GPIO.IN)
+	GPIO.setup(22,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 	GPIO.output(17,GPIO.HIGH)
 
 def on_connect(client, userdata, flags, rc):
@@ -46,17 +46,19 @@ def on_message(client, userdata, msg):
 		print json_msg["state"]["reported"]["ON_OFF"]
 		if json_msg["state"]["reported"]["ON_OFF"] == "ON":
 			print "GPIO HIGH"
-			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.HIGH)
+			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.HIGH)
 		elif json_msg["state"]["reported"]["ON_OFF"] == "OFF":
 			print "GPIO LOW"
-			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.LOW)
+			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.LOW)
 		elif json_msg["state"]["reported"]["ON_OFF"] == "TOGGLE":
-			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.LOW)
+			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.LOW)
 			time.sleep(0.2)
-			GPIO.output(json_msg["state"]["reported"]["GPIO"],GPIO.HIGH)
+			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.HIGH)
 		elif json_msg["state"]["reported"]["ON_OFF"] == "REQUEST_STATUS":
 			print "GETTING STATUS"
+			print json_msg["state"]["reported"]["GPIO"]
 			garagestatus = GPIO.input(int(json_msg["state"]["reported"]["GPIO"]))
+			print garagestatus
 			if garagestatus == 1:
 				client.publish("Garage","{\"state\":{\"reported\":{\"ON_OFF\":\"UPDATE_STATUS\",\"DATA\":\"SHUT\"}}}")
 			else:
