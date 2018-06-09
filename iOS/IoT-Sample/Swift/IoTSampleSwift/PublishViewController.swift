@@ -90,15 +90,15 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     @IBAction func wasGarageTOGGLEButton1Pressed(_ sender: UIButton) {
-        sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: 17, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
+        sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton1_GPIO, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
     }
     
     @IBAction func wasGarageTOGGLEButton2Pressed(_ sender: UIButton) {
-        sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: 27, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
+        sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton2_GPIO, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
     }
     
     @IBAction func wasRequestSTATUSButtonPressed(_ sender: UIButton) {
-        sendPublishStringCommandWith(buttonState: "REQUEST_STATUS", gpioNum: 18, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
+        sendPublishStringCommandWith(buttonState: "REQUEST_STATUS", gpioNum: RequestSTATUSButton_GPIO, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
     }
     
     

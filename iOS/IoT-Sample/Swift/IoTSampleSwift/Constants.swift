@@ -17,10 +17,14 @@ import Foundation
 import AWSCore
 
 //WARNING: To run this sample correctly, you must set the following constants.
-let AwsRegion = AWSRegionType.Unknown // e.g. AWSRegionType.USEast1
+let AwsRegion = AWSRegionType.unknown // e.g. AWSRegionType.USEast1
 let CognitoIdentityPoolId = "YourCognitoIdentityPoolId"
 let CertificateSigningRequestCommonName = "IoTSampleSwift Application"
 let CertificateSigningRequestCountryName = "Your Country"
 let CertificateSigningRequestOrganizationName = "Your Organization"
 let CertificateSigningRequestOrganizationalUnitName = "Your Organizational Unit"
 let PolicyName = "YourPolicyName"
+
+let GarageTOGGLEButton1_GPIO = 17
+let GarageTOGGLEButton2_GPIO = 27
+let RequestSTATUSButton_GPIO = 22
