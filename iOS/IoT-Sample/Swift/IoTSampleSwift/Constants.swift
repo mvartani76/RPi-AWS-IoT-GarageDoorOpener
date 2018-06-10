@@ -28,3 +28,5 @@ let PolicyName = "YourPolicyName"
 let GarageTOGGLEButton1_GPIO = 17
 let GarageTOGGLEButton2_GPIO = 27
 let RequestSTATUSButton_GPIO = 22
+
+let HomeDistanceThresh = 200.0

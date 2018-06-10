@@ -34,7 +34,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     let homeLocation: CLLocation = CLLocation(latitude: 42.572215, longitude: -83.488498)
-    let homeDistanceThresh: Double = 200.0
+    
     
     var timer = Timer()
     
@@ -90,28 +90,18 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     @IBAction func wasGarageTOGGLEButton1Pressed(_ sender: UIButton) {
-        sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton1_GPIO, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
+        sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton1_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
     }
     
     @IBAction func wasGarageTOGGLEButton2Pressed(_ sender: UIButton) {
-        sendPublishStringCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton2_GPIO, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
+        sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton2_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
     }
     
     @IBAction func wasRequestSTATUSButtonPressed(_ sender: UIButton) {
-        sendPublishStringCommandWith(buttonState: "REQUEST_STATUS", gpioNum: RequestSTATUSButton_GPIO, homeDistanceThresh: homeDistanceThresh, indicatorLabel: statusLabel)
+        sendGarageStatusCommandWith(buttonState: "REQUEST_STATUS", gpioNum: RequestSTATUSButton_GPIO, indicatorLabel: statusLabel)
     }
     
-    
-    @IBAction func sliderValueChanged(_ sender: UISlider) {
-        print("\(sender.value)")
-
-        let iotDataManager = AWSIoTDataManager.default()
-        let tabBarViewController = tabBarController as! IoTSampleTabBarController
-
-        iotDataManager?.publishString("\(sender.value)", onTopic:tabBarViewController.topic, qoS:.messageDeliveryAttemptedAtMostOnce)
-    }
-    
-    func sendPublishStringCommandWith(buttonState: String, gpioNum: Int, homeDistanceThresh: Double, indicatorLabel: UILabel) {
+    func sendGarageToggleCommandWith(buttonState: String, gpioNum: Int, homeDistanceThresh: Double, indicatorLabel: UILabel) {
         
         guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
         
@@ -127,6 +117,14 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
     }
     
+    func sendGarageStatusCommandWith(buttonState: String, gpioNum: Int, indicatorLabel: UILabel) {
+        
+        let iotDataManager = AWSIoTDataManager.default()
+        iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+
+        timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
+    }
+    
     @objc func clearIndicatorLabel() {
         statusLabel.text = ""
     }
@@ -137,7 +135,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.stopUpdatingLocation()
         
         statusLabel.text = "Distance to Home = \(round(distanceToHome*10)/10) meters"
-        if distanceToHome > homeDistanceThresh {
+        if distanceToHome > HomeDistanceThresh {
             PanelView.backgroundColor = UIColor(red: CGFloat(255/255.0), green: CGFloat(153/255.0), blue: CGFloat(204/255.0), alpha: CGFloat(1.0))
         }
         else {
