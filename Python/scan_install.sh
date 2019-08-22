@@ -93,3 +93,11 @@ sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/bin/python2.7
 printf "Installing python-dotenv libraries...\n"
 sudo pip install python-dotenv
 pip install python-dotenv
+
+# Update environment variables
+# from stackoverflow.com/questions/19331497/set-environment-variables-from-file-of-key-value-pairs
+#
+# This will read values from the .env file so you will need to have a .env present
+set -o allexport
+eval $(grep -v '^#' .env | sed 's/^/export /')
+set +o allexport
