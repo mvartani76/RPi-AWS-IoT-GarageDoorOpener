@@ -51,7 +51,7 @@ class ConnectionViewController: UIViewController, UITextViewDelegate {
                 case .connected:
                     tabBarViewController.mqttStatus = "Connected"
                     print( tabBarViewController.mqttStatus )
-                    sender.setTitle( "Disconnect", for:UIControlState())
+                    sender.setTitle( "Disconnect", for:UIControl.State())
                     self.activityIndicatorView.stopAnimating()
                     self.connected = true
                     sender.isEnabled = true
@@ -223,7 +223,7 @@ class ConnectionViewController: UIViewController, UITextViewDelegate {
                 DispatchQueue.main.async {
                     self.activityIndicatorView.stopAnimating()
                     self.connected = false
-                    sender.setTitle( "Connect", for:UIControlState())
+                    sender.setTitle( "Connect", for:UIControl.State())
                     sender.isEnabled = true
                     tabBarViewController.viewControllers = [ self, self.configurationViewController ]
                 }
