@@ -147,16 +147,6 @@ time.sleep(2)
 
 InitialGPIOSetup = True
 
-# Publish to the same topic in a loop forever
-loopCount = 0
+# The main loop just sleeps
 while True:
-    #if args.mode == 'both' or args.mode == 'publish':
-    #    message = {}
-    #    message['message'] = args.message
-    #    message['sequence'] = loopCount
-    #    messageJson = json.dumps(message)
-    #    myAWSIoTMQTTClient.publish(topic, messageJson, 1)
-    #    if args.mode == 'publish':
-    #        print('Published topic %s: %s\n' % (topic, messageJson))
-    #    loopCount += 1
     time.sleep(1)
