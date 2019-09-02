@@ -1,0 +1,44 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "garage opener",
+            "intents": [
+                {
+                    "name": "ToggleIntent",
+                    "slots": [
+                        {
+                            "name": "Garage",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "close garage {Garage}",
+                        "open garage {Garage}",
+                        "toggle garage {Garage}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                }
+            ],
+            "types": []
+        }
+    }
+}
