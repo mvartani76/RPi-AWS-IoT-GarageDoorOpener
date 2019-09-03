@@ -65,6 +65,116 @@ def update_toggle(intent):
         speech_output, reprompt_text, should_end_session))
     return response
 
+def open_garage(intent):
+    """
+    Opens the specific garage door. Updates IoT shadow. Builds a
+    response confirming the update or requesting the user repeat the query if
+    garage < 1 or garage > 2.
+    
+    Args:
+        intent: Python dict of intent
+    Returns:
+        Python dict of response message
+    """
+    card_title = "Open"
+
+    garage = intent.get('slots',{}).get('Garage',{}).get('value')
+
+    if garage:
+        garage = int(garage)
+        # check if garage is 1 or 2 (TBD to auto configure # of garage doors)
+        if garage > 0 and garage <= 2:
+            speech_output = "Opening garage {}.".format(garage)
+            if garage == 1:
+                new_value_dict = {"garage1_status": "OPEN"}
+            elif garage == 2:
+                new_value_dict = {"garage2_status": "OPEN"}
+            shadow_connection.update_shadow(new_value_dict)
+        else:
+            speech_output = "I'm sorry that value is not in the proper range. "\
+                "Please give me a number 1 or 2."
+    else:
+        speech_output = "I did not understand that. Please repeat your request."
+    
+    response = response_builders.build_response(session_attributes,
+        response_builders.build_speechlet_response(card_title,
+        speech_output, reprompt_text, should_end_session))
+    return response
+
+def close_garage(intent):
+    """
+    Closes the specific garage door. Updates IoT shadow. Builds a
+    response confirming the update or requesting the user repeat the query if
+    garage < 1 or garage > 2.
+    
+    Args:
+        intent: Python dict of intent
+    Returns:
+        Python dict of response message
+    """
+    card_title = "Close"
+
+    garage = intent.get('slots',{}).get('Garage',{}).get('value')
+
+    if garage:
+        garage = int(garage)
+        # check if garage is 1 or 2 (TBD to auto configure # of garage doors)
+        if garage > 0 and garage <= 2:
+            speech_output = "Closing garage {}.".format(garage)
+            if garage == 1:
+                new_value_dict = {"garage1_status": "CLOSE"}
+            elif garage == 2:
+                new_value_dict = {"garage2_status": "CLOSE"}
+            shadow_connection.update_shadow(new_value_dict)
+        else:
+            speech_output = "I'm sorry that value is not in the proper range. "\
+                "Please give me a number 1 or 2."
+    else:
+        speech_output = "I did not understand that. Please repeat your request."
+    
+    response = response_builders.build_response(session_attributes,
+        response_builders.build_speechlet_response(card_title,
+        speech_output, reprompt_text, should_end_session))
+    return response
+
+
+def get_status(intent):
+    """
+    Gets the status of the requested garage door.
+    
+    Args:
+        intent: Python dict of intent
+    Returns:
+        Python dict of response message
+    """
+    card_title = "Status"
+
+    garage = intent.get('slots',{}).get('Garage',{}).get('value')
+
+    if garage:
+        garage = int(garage)
+        # check if garage is 1 or 2 (TBD to auto configure # of garage doors)
+        if garage > 0 and garage <= 2:
+            speech_output = "Garage door {} ".format(garage) + "is open."
+            if garage == 1:
+                new_value_dict = {"garage":17}
+            else:
+                new_value_dict = {"garage":27}
+            shadow_response = shadow_connection.get_shadow(new_value_dict)
+            print(shadow_response)
+        else:
+            speech_output = "I'm sorry that value is not in the proper range. "\
+                "Please give me a number 1 or 2."
+    else:
+        speech_output = "I did not understand that. Please repeat your request."
+    
+    response = response_builders.build_response(session_attributes,
+        response_builders.build_speechlet_response(card_title,
+        speech_output, reprompt_text, should_end_session))
+    return response
+
+
+
 def handle_session_end_request():
     """
     Builds a response with a blank message and no session data. If using

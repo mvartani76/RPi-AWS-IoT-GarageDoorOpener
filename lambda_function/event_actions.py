@@ -47,6 +47,12 @@ def on_intent(intent_request, session):
 
     if intent_name == "ToggleIntent":
         return behaviors.update_toggle(intent)
+    elif intent_name == "OpenIntent":
+        return behaviors.open_garage(intent)
+    elif intent_name == "CloseIntent":
+        return behaviors.close_garage(intent)
+    elif intent_name == "StatusIntent":
+        return behaviors.get_status(intent)
     elif intent_name == "AMAZON.HelpIntent":
         return behaviors.get_help_response()
     elif intent_name == "AMAZON.CancelIntent" or \
