@@ -137,7 +137,6 @@ def close_garage(intent):
         speech_output, reprompt_text, should_end_session))
     return response
 
-
 def get_status(intent):
     """
     Gets the status of the requested garage door.
@@ -155,19 +154,19 @@ def get_status(intent):
         garage = int(garage)
         # check if garage is 1 or 2 (TBD to auto configure # of garage doors)
         if garage > 0 and garage <= 2:
-            speech_output = "Garage door {} ".format(garage) + "is open."
             if garage == 1:
-                new_value_dict = {"garage":17}
+                garage_request = "garage1_status"
             else:
-                new_value_dict = {"garage":27}
-            shadow_response = shadow_connection.get_shadow(new_value_dict)
-            print(shadow_response)
+                garage_request = "garage2_status"
+            shadow_response = shadow_connection.get_shadow(garage_request)
+
+            speech_output = "Garage door {} ".format(garage) + "is " + shadow_response
         else:
             speech_output = "I'm sorry that value is not in the proper range. "\
                 "Please give me a number 1 or 2."
     else:
         speech_output = "I did not understand that. Please repeat your request."
-    
+
     response = response_builders.build_response(session_attributes,
         response_builders.build_speechlet_response(card_title,
         speech_output, reprompt_text, should_end_session))
