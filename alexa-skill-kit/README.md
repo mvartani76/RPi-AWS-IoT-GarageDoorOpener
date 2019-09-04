@@ -7,3 +7,5 @@ The following are some links that I found to be useful when developing the alexa
 - [Building an IOT Device with Alexa AWS Python and Raspberry Pi Part 4](https://medium.com/@arthurltonelli/building-an-iot-device-with-alexa-aws-python-and-raspberry-pi-part-iv-8725923daad0)
 
 - [Alexa Python Smarthome Switch Sample GitHub](https://github.com/alexa/skill-sample-python-smarthome-switch)
+- [Alexa Sample Python HowTo GitHub](https://github.com/alexa/skill-sample-python-howto)
+- [Example Alexa Skills GitGub](https://github.com/leeassam/alexa-rpi-skills)
