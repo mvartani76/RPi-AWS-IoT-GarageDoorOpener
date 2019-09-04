@@ -8,3 +8,4 @@ The following links were helpful when trying to figure out how to use the IoT Th
 
 - [Device Shadows Basics](https://iotbytes.wordpress.com/device-shadows-part-1-basics/)
 - [AWS Developer Guide - Using Device Shadows](https://docs.aws.amazon.com/iot/latest/developerguide/using-device-shadows.html)
+- [AWS Developer Guide - Shadow Document Syntax](https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-document-syntax.html#device-shadow-example-response-json)
