@@ -10,3 +10,5 @@ The following are some links that I found to be useful when developing the alexa
 - [Alexa Sample Python HowTo GitHub](https://github.com/alexa/skill-sample-python-howto)
 - [leeassam Example Alexa Skills GitHub](https://github.com/leeassam/alexa-rpi-skills)
 - [DavidWeigao AlexaSmartHome GitHub](https://github.com/davidweigao/AlexaSmartHome)
+- [Steps to Build a Smart Home Skill](https://developer.amazon.com/docs/smarthome/steps-to-build-a-smart-home-skill.html)
+- [5 Common Error Messages for Custom Alexa Skills and How to Troubleshoot Them](https://developer.amazon.com/blogs/alexa/post/0d8c5234-3c7a-4b77-9906-b43a5310bde4/5-common-error-messages-for-custom-alexa-skills-and-how-to-troubleshoot-them)
