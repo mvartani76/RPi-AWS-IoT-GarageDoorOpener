@@ -8,4 +8,5 @@ The following are some links that I found to be useful when developing the alexa
 
 - [Alexa Python Smarthome Switch Sample GitHub](https://github.com/alexa/skill-sample-python-smarthome-switch)
 - [Alexa Sample Python HowTo GitHub](https://github.com/alexa/skill-sample-python-howto)
-- [Example Alexa Skills GitHub](https://github.com/leeassam/alexa-rpi-skills)
+- [leeassam Example Alexa Skills GitHub](https://github.com/leeassam/alexa-rpi-skills)
+- [DavidWeigao AlexaSmartHome GitHub](https://github.com/davidweigao/AlexaSmartHome)
