@@ -228,7 +228,7 @@ class ConnectionViewController: UIViewController, UITextViewDelegate {
         logTextView.resignFirstResponder()
 
         // Initialize AWSMobileClient for authorization
-        AWSMobileClient.sharedInstance().initialize { (userState, error) in
+        AWSMobileClient.default().initialize { (userState, error) in
             guard error == nil else {
                 print("Failed to initialize AWSMobileClient. Error: \(error!.localizedDescription)")
                 return
@@ -240,12 +240,12 @@ class ConnectionViewController: UIViewController, UITextViewDelegate {
         let iotEndPoint = AWSEndpoint(urlString: IOT_ENDPOINT)
 
         // Configuration for AWSIoT control plane APIs
-        let iotConfiguration = AWSServiceConfiguration(region: AWSRegion, credentialsProvider: AWSMobileClient.sharedInstance())
+        let iotConfiguration = AWSServiceConfiguration(region: AWSRegion, credentialsProvider: AWSMobileClient.default())
 
         // Configuration for AWSIoT data plane APIs
         let iotDataConfiguration = AWSServiceConfiguration(region: AWSRegion,
                                                            endpoint: iotEndPoint,
-                                                           credentialsProvider: AWSMobileClient.sharedInstance())
+                                                           credentialsProvider: AWSMobileClient.default())
         AWSServiceManager.default().defaultServiceConfiguration = iotConfiguration
 
         iotManager = AWSIoTManager.default()
