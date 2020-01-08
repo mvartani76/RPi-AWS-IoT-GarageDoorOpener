@@ -118,7 +118,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     
     func sendGarageStatusCommandWith(buttonState: String, gpioNum: Int, indicatorLabel: UILabel) {
         
-        let iotDataManager = AWSIoTDataManager.default()
+        let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
         iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
 
         timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)

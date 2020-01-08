@@ -388,6 +388,7 @@
 			baseConfigurationReference = 0B5FE74FD1FF3A98C28670F1 /* Pods-IoTSampleSwift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = IoTSampleSwift/IoTSampleSwift.entitlements;
 				DEVELOPMENT_TEAM = K79TKW9544;
 				INFOPLIST_FILE = IoTSampleSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -404,6 +405,7 @@
 			baseConfigurationReference = 91B555020565954B6F61098C /* Pods-IoTSampleSwift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = IoTSampleSwift/IoTSampleSwift.entitlements;
 				DEVELOPMENT_TEAM = K79TKW9544;
 				INFOPLIST_FILE = IoTSampleSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;

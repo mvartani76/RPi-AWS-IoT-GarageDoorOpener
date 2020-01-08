@@ -228,7 +228,7 @@ class ConnectionViewController: UIViewController, UITextViewDelegate {
         logTextView.resignFirstResponder()
 
         // Initialize AWSMobileClient for authorization
-        AWSMobileClient.default().initialize { (userState, error) in
+        AWSMobileClient.sharedInstance().initialize { (userState, error) in
             guard error == nil else {
                 print("Failed to initialize AWSMobileClient. Error: \(error!.localizedDescription)")
                 return
