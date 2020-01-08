@@ -31,9 +31,9 @@ class SubscribeViewController: UIViewController {
         
         self.topicLabel.text = "Topic: \(tabBarViewController.topic)"
         
-        iotDataManager?.subscribe(toTopic: tabBarViewController.topic, qoS: .messageDeliveryAttemptedAtMostOnce, messageCallback: {
+        iotDataManager.subscribe(toTopic: tabBarViewController.topic, qoS: .messageDeliveryAttemptedAtMostOnce, messageCallback: {
             (payload) ->Void in
-            let stringValue = NSString(data: payload!, encoding: String.Encoding.utf8.rawValue)!
+            let stringValue = NSString(data: payload, encoding: String.Encoding.utf8.rawValue)!
 
             print("received: \(stringValue)")
             DispatchQueue.main.async {
@@ -45,7 +45,7 @@ class SubscribeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         let iotDataManager = AWSIoTDataManager.default()
         let tabBarViewController = tabBarController as! IoTSampleTabBarController
-        iotDataManager?.unsubscribeTopic(tabBarViewController.topic)
+        iotDataManager.unsubscribeTopic(tabBarViewController.topic)
     }
 
     override func didReceiveMemoryWarning() {

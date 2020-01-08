@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		227C838823C66DE8007BC6A9 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 227C838723C66DE8007BC6A9 /* awsconfiguration.json */; };
 		7486623E92C73858C0A0F2F8 /* Pods_IoTSampleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32F1D99230C34735307AD0 /* Pods_IoTSampleSwift.framework */; };
 		A62CEE5B1BF3B50800E9C895 /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62CEE5A1BF3B50800E9C895 /* SubscribeViewController.swift */; };
 		A6867C941BF530A700956B68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6867C931BF530A700956B68 /* Constants.swift */; };
@@ -24,6 +25,8 @@
 		0A32F1D99230C34735307AD0 /* Pods_IoTSampleSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IoTSampleSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5FE74FD1FF3A98C28670F1 /* Pods-IoTSampleSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoTSampleSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IoTSampleSwift/Pods-IoTSampleSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		19CC868788E3FB2186476009 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		227C838723C66DE8007BC6A9 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
+		227C838923C66DF3007BC6A9 /* IoTSampleSwift.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = IoTSampleSwift.entitlements; sourceTree = "<group>"; };
 		3B90C03514D3F9F7EDF1FF45 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		91B555020565954B6F61098C /* Pods-IoTSampleSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoTSampleSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-IoTSampleSwift/Pods-IoTSampleSwift.release.xcconfig"; sourceTree = "<group>"; };
 		A62CEE5A1BF3B50800E9C895 /* SubscribeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +91,8 @@
 				A6B39BB61BF3A93600045F73 /* ConnectionViewController.swift */,
 				A6B39BB81BF3A93600045F73 /* PublishViewController.swift */,
 				A6E263211C06870D0032B28D /* ConfigurationViewController.swift */,
+				227C838923C66DF3007BC6A9 /* IoTSampleSwift.entitlements */,
+				227C838723C66DE8007BC6A9 /* awsconfiguration.json */,
 				A62CEE5A1BF3B50800E9C895 /* SubscribeViewController.swift */,
 				A6B39BBA1BF3A93600045F73 /* Main.storyboard */,
 				A6B39BBD1BF3A93600045F73 /* Assets.xcassets */,
@@ -177,6 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				227C838823C66DE8007BC6A9 /* awsconfiguration.json in Resources */,
 				A6B39BC11BF3A93600045F73 /* LaunchScreen.storyboard in Resources */,
 				A6B39BBE1BF3A93600045F73 /* Assets.xcassets in Resources */,
 				A6B39BBC1BF3A93600045F73 /* Main.storyboard in Resources */,
@@ -192,18 +198,26 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-IoTSampleSwift/Pods-IoTSampleSwift-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-IoTSampleSwift/Pods-IoTSampleSwift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSIoT/AWSIoT.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSIoT.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IoTSampleSwift/Pods-IoTSampleSwift-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IoTSampleSwift/Pods-IoTSampleSwift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DC1F7059CF8DC38C8DFA1A4A /* [CP] Check Pods Manifest.lock */ = {
@@ -310,7 +324,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -360,7 +374,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

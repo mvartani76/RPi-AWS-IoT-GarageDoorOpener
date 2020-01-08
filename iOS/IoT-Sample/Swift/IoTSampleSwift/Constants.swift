@@ -17,13 +17,17 @@ import Foundation
 import AWSCore
 
 //WARNING: To run this sample correctly, you must set the following constants.
-let AwsRegion = AWSRegionType.unknown // e.g. AWSRegionType.USEast1
-let CognitoIdentityPoolId = "YourCognitoIdentityPoolId"
+
 let CertificateSigningRequestCommonName = "IoTSampleSwift Application"
 let CertificateSigningRequestCountryName = "Your Country"
 let CertificateSigningRequestOrganizationName = "Your Organization"
 let CertificateSigningRequestOrganizationalUnitName = "Your Organizational Unit"
 let PolicyName = "YourPolicyName"
+
+// This is the endpoint in your AWS IoT console. eg: https://xxxxxxxxxx.iot.<region>.amazonaws.com
+let AWSRegion = AWSRegionType.Unknown // e.g. AWSRegionType.USEast1
+let IOT_ENDPOINT = "https://xxxxxxxxxx.iot.<region>.amazonaws.com"
+let ASWIoTDataManager = "MyIotDataManager"
 
 let GarageTOGGLEButton1_GPIO = 17
 let GarageTOGGLEButton2_GPIO = 27

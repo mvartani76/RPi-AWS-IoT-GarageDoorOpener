@@ -48,13 +48,12 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
 
-        iotDataManager?.subscribe(toTopic: tabBarViewController.topic, qoS: .messageDeliveryAttemptedAtMostOnce, messageCallback: {
+        iotDataManager.subscribe(toTopic: tabBarViewController.topic, qoS: .messageDeliveryAttemptedAtMostOnce, messageCallback: {
             (payload) ->Void in
-            let stringValue = String(describing: NSString(data: payload!, encoding: String.Encoding.utf8.rawValue)!)
+            let stringValue = String(describing: NSString(data: payload, encoding: String.Encoding.utf8.rawValue)!)
 
             let data = stringValue.data(using: .utf8)!
             do {
-
                 if let jsonArray = try JSONSerialization.jsonObject(with: data, options :.mutableContainers) as? [String:Any]
                 {
                     let jsonState = jsonArray["state"] as! [String:Any]
@@ -107,7 +106,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         
         if distanceToHome < homeDistanceThresh {
             let iotDataManager = AWSIoTDataManager.default()
-            iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+            iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
             indicatorLabel.text = "Within Distance Threshold, passed \(buttonState) to \(gpioNum)"
         }
         else {
@@ -120,7 +119,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     func sendGarageStatusCommandWith(buttonState: String, gpioNum: Int, indicatorLabel: UILabel) {
         
         let iotDataManager = AWSIoTDataManager.default()
-        iotDataManager?.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+        iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
 
         timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
     }
