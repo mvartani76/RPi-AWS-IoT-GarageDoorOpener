@@ -26,7 +26,7 @@ class SubscribeViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        let iotDataManager = AWSIoTDataManager.default()
+        let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
         let tabBarViewController = tabBarController as! IoTSampleTabBarController
         
         self.topicLabel.text = "Topic: \(tabBarViewController.topic)"
@@ -43,7 +43,7 @@ class SubscribeViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        let iotDataManager = AWSIoTDataManager.default()
+        let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
         let tabBarViewController = tabBarController as! IoTSampleTabBarController
         iotDataManager.unsubscribeTopic(tabBarViewController.topic)
     }

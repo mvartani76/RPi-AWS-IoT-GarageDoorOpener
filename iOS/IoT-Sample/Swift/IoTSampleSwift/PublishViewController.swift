@@ -41,7 +41,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let iotDataManager = AWSIoTDataManager.default()
+        let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
         let tabBarViewController = tabBarController as! IoTSampleTabBarController
         
         self.locationManager.delegate = self
@@ -105,7 +105,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
         
         if distanceToHome < homeDistanceThresh {
-            let iotDataManager = AWSIoTDataManager.default()
+            let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
             iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
             indicatorLabel.text = "Within Distance Threshold, passed \(buttonState) to \(gpioNum)"
         }
