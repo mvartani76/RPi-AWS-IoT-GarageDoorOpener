@@ -62,7 +62,10 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
 
                     if msgState == "UPDATE_STATUS" {
                         let garageState = reportedState["DATA"] as! String
-                        self.statusLabel.text = garageState
+                        DispatchQueue.main.sync {
+                            // Update the statusLabel with the garage state
+                            self.statusLabel.text = garageState
+                        }
                     }
                 } else {
                     print("bad json")
