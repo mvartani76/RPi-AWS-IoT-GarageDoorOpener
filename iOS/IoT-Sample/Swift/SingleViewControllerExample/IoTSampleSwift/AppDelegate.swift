@@ -15,6 +15,7 @@
 
 import UIKit
 import AWSCore
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Setting up logging to xcode console.
         AWSDDLog.sharedInstance.logLevel = .debug
         AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
+
+        // Setup Firebase
+        FirebaseApp.configure()
 
         return true
     }
