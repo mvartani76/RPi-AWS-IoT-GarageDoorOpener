@@ -32,6 +32,8 @@ AllowedActions = ['both', 'publish', 'subscribe']
 LCD_DISPLAY_DELAY = 3
 GARAGE_SHUT_VALUE = 1
 IP_ADDR_DISPLAY_TIMER_THRESHOLD = 10
+VERSION_LABEL_TIMER_THRESHOLD = 20
+CODE_VERSION = "1.0"
 
 def get_ip_addr():
 	try:
@@ -217,12 +219,18 @@ while True:
 		mylcd.lcd_display_string("Time: %s" %time.strftime("%H:%M:%S"), 1)
 		mylcd.lcd_display_string("Date: %s" %time.strftime("%m/%d/%Y"), 2)
 		time.sleep(1)
-		if ip_timer >= IP_ADDR_DISPLAY_TIMER_THRESHOLD:
+		if ip_timer >= VERSION_LABEL_TIMER_THRESHOLD:
+			mylcd.lcd_clear()
+			mylcd.lcd_display_string("Code Version: %s" %CODE_VERSION, 1)
+			time.sleep(3)
+			mylcd.lcd_clear()
+			ip_timer = 0
+		if ip_timer == IP_ADDR_DISPLAY_TIMER_THRESHOLD:
 			mylcd.lcd_clear()
 			mylcd.lcd_display_string("IP: %s" %ipaddr, 1)
 			time.sleep(3)
 			mylcd.lcd_clear()
-			ip_timer = 0
+			ip_timer = ip_timer + 1
 		else:
 			ip_timer = ip_timer + 1
 	else:
