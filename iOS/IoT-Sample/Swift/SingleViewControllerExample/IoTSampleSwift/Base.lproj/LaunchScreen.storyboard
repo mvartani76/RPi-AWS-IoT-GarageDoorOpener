@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,14 +15,76 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aWM-6a-Srw">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pry-47-9Xx" userLabel="TopSpacerView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="108.33333333333333"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVg-rR-TNO" userLabel="TitleView">
+                                        <rect key="frame" x="0.0" y="108.33333333333334" width="414" height="108.33333333333334"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Control My Garage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbO-9x-KPm">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="108.33333333333333"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="lbO-9x-KPm" firstAttribute="centerY" secondItem="gVg-rR-TNO" secondAttribute="centerY" id="Ece-W2-SXa"/>
+                                            <constraint firstItem="lbO-9x-KPm" firstAttribute="width" secondItem="gVg-rR-TNO" secondAttribute="width" id="UQz-EJ-AMC"/>
+                                            <constraint firstItem="lbO-9x-KPm" firstAttribute="centerX" secondItem="gVg-rR-TNO" secondAttribute="centerX" id="f8r-Km-11Q"/>
+                                            <constraint firstItem="lbO-9x-KPm" firstAttribute="height" secondItem="gVg-rR-TNO" secondAttribute="height" id="lOD-t4-ss6"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvF-29-O6g">
+                                        <rect key="frame" x="0.0" y="216.66666666666666" width="414" height="54.333333333333343"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEJ-zO-m7l" userLabel="ImageContainer">
+                                        <rect key="frame" x="0.0" y="271" width="414" height="433.33333333333326"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uky-x4-Cgt">
+                                                <rect key="frame" x="103.66666666666669" y="-78.333333333333343" width="207" height="590"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Uky-x4-Cgt" firstAttribute="width" secondItem="eEJ-zO-m7l" secondAttribute="width" multiplier="0.5" id="GSb-LL-jVw"/>
+                                            <constraint firstItem="Uky-x4-Cgt" firstAttribute="centerY" secondItem="eEJ-zO-m7l" secondAttribute="centerY" id="dMP-gg-erN"/>
+                                            <constraint firstItem="Uky-x4-Cgt" firstAttribute="centerX" secondItem="eEJ-zO-m7l" secondAttribute="centerX" id="pzN-KT-JDy"/>
+                                            <constraint firstItem="Uky-x4-Cgt" firstAttribute="height" secondItem="eEJ-zO-m7l" secondAttribute="height" multiplier="1.36054" id="rFr-kt-hGE"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w54-mY-uXJ" userLabel="BottomView">
+                                        <rect key="frame" x="0.0" y="704.33333333333337" width="414" height="31.666666666666629"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="w54-mY-uXJ" firstAttribute="height" secondItem="pry-47-9Xx" secondAttribute="height" multiplier="0.291262" id="0Pb-RF-cqg"/>
+                                    <constraint firstItem="eEJ-zO-m7l" firstAttribute="height" secondItem="pry-47-9Xx" secondAttribute="height" multiplier="4" id="dN6-oM-G5G"/>
+                                    <constraint firstItem="mvF-29-O6g" firstAttribute="height" secondItem="pry-47-9Xx" secondAttribute="height" multiplier="0.5" id="lx4-P7-Oqo"/>
+                                    <constraint firstItem="gVg-rR-TNO" firstAttribute="height" secondItem="pry-47-9Xx" secondAttribute="height" id="vs0-1P-D4Q"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33000000000000002" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aWM-6a-Srw" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Rnk-XG-MlJ"/>
+                            <constraint firstItem="aWM-6a-Srw" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="ULo-Fy-nR1"/>
+                            <constraint firstItem="aWM-6a-Srw" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WQ9-Q5-XB5"/>
+                            <constraint firstItem="aWM-6a-Srw" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="lZk-Ww-qWh"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="374.18478260869568"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo.png" width="614.4000244140625" height="614.4000244140625"/>
+    </resources>
 </document>

@@ -291,15 +291,19 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     @IBAction func wasGarageTOGGLEButton1Pressed(_ sender: UIButton) {
+        sender.pulsate()
         sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton1_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
     }
     
     @IBAction func wasGarageTOGGLEButton2Pressed(_ sender: UIButton) {
+        sender.pulsate()
         sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton2_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
     }
     
     @IBAction func wasRequestSTATUSButtonPressed(_ sender: UIButton) {
+        sender.shrink()
         sendGarageStatusCommandWith(buttonState: "REQUEST_STATUS", gpioNum: RequestSTATUSButton_GPIO, indicatorLabel: statusLabel)
+        //sender.expand()
     }
     
     func sendGarageToggleCommandWith(buttonState: String, gpioNum: Int, homeDistanceThresh: Double, indicatorLabel: UILabel) {

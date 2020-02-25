@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221413BB24022F1C0001170A /* button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221413BA24022F1C0001170A /* button.swift */; };
+		221413BD2404C4D40001170A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 221413BC2404C4D40001170A /* logo.png */; };
 		22DDBA3823CADFCD00C500FF /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 22DDBA3723CADFCD00C500FF /* awsconfiguration.json */; };
 		22DDBA3A23CB9A3000C500FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22DDBA3923CB9A3000C500FF /* GoogleService-Info.plist */; };
 		7486623E92C73858C0A0F2F8 /* Pods_IoTSampleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32F1D99230C34735307AD0 /* Pods_IoTSampleSwift.framework */; };
@@ -22,6 +24,8 @@
 		0A32F1D99230C34735307AD0 /* Pods_IoTSampleSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IoTSampleSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5FE74FD1FF3A98C28670F1 /* Pods-IoTSampleSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoTSampleSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IoTSampleSwift/Pods-IoTSampleSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		19CC868788E3FB2186476009 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		221413BA24022F1C0001170A /* button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button.swift; sourceTree = "<group>"; };
+		221413BC2404C4D40001170A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		227C838923C66DF3007BC6A9 /* IoTSampleSwift.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = IoTSampleSwift.entitlements; sourceTree = "<group>"; };
 		22DDBA3723CADFCD00C500FF /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		22DDBA3923CB9A3000C500FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "IoTSampleSwift/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -86,7 +90,9 @@
 				A6B39BB81BF3A93600045F73 /* PublishViewController.swift */,
 				227C838923C66DF3007BC6A9 /* IoTSampleSwift.entitlements */,
 				A6B39BBA1BF3A93600045F73 /* Main.storyboard */,
+				221413BA24022F1C0001170A /* button.swift */,
 				A6B39BBD1BF3A93600045F73 /* Assets.xcassets */,
+				221413BC2404C4D40001170A /* logo.png */,
 				A6B39BBF1BF3A93600045F73 /* LaunchScreen.storyboard */,
 				A62CEE591BF3AEA500E9C895 /* Supporting Files */,
 			);
@@ -175,6 +181,7 @@
 			files = (
 				22DDBA3823CADFCD00C500FF /* awsconfiguration.json in Resources */,
 				A6B39BC11BF3A93600045F73 /* LaunchScreen.storyboard in Resources */,
+				221413BD2404C4D40001170A /* logo.png in Resources */,
 				22DDBA3A23CB9A3000C500FF /* GoogleService-Info.plist in Resources */,
 				A6B39BBE1BF3A93600045F73 /* Assets.xcassets in Resources */,
 				A6B39BBC1BF3A93600045F73 /* Main.storyboard in Resources */,
@@ -244,6 +251,7 @@
 				A6867C941BF530A700956B68 /* Constants.swift in Sources */,
 				A6B39BB91BF3A93600045F73 /* PublishViewController.swift in Sources */,
 				A6B39BB51BF3A93600045F73 /* AppDelegate.swift in Sources */,
+				221413BB24022F1C0001170A /* button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
