@@ -25,7 +25,7 @@ enum SerializationError: Error {
 
 class PublishViewController: UIViewController, CLLocationManagerDelegate {
 
-    @IBOutlet weak var publishSlider: UISlider!
+    @IBOutlet var bluetoothEnable: UIButton!
     @IBOutlet weak var garage1TOGGLE: UIButton!
     @IBOutlet weak var garage2TOGGLE: UIButton!
     @IBOutlet weak var requestSTATUS: UIButton!
@@ -40,7 +40,9 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     @objc var iotManager: AWSIoTManager!;
     @objc var iot: AWSIoT!
     @objc var connected = false;
-    
+
+    var bluetoothEnabled = false
+
     var mqttStatus: String = "Disconnected"
     var topic: String = "Garage"
     
@@ -290,6 +292,20 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func wasEnableBluetoothButtonPressed(_ sender: UIButton) {
+        sender.shrink()
+
+        if (bluetoothEnabled == false) {
+            bluetoothEnabled = true
+
+            sender.setTitle("Bluetooth Enabled", for: .normal)
+            sender.setTitle("Bluetooth Enabled", for: .highlighted)
+        } else {
+            bluetoothEnabled = false
+            bluetoothEnable.setTitle("Enable Bluetooth", for: .normal)
+        }
+
+    }
     @IBAction func wasGarageTOGGLEButton1Pressed(_ sender: UIButton) {
         sender.pulsate()
         sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton1_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)

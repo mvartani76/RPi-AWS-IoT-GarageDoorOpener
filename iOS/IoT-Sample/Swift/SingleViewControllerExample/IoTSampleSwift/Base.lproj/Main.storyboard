@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8rJ-Kc-sve">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8rJ-Kc-sve">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,8 +24,31 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VdI-3D-xHN">
                                         <rect key="frame" x="37.5" y="67" width="225" height="400"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8B-ba-w3O" userLabel="EnableBluetooth">
+                                                <rect key="frame" x="0.0" y="0.0" width="225" height="84"/>
+                                                <color key="backgroundColor" red="0.44103167808219179" green="0.69364056625342485" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="20"/>
+                                                <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Enable Bluetooth">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="wasEnableBluetoothButtonPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="Bx9-ZU-Nue"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJd-20-fZD" userLabel="SpacerView">
+                                                <rect key="frame" x="0.0" y="84" width="225" height="10"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="10" id="Zdp-pn-8qq" userLabel="height = 10"/>
+                                                </constraints>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-iV-9bn" userLabel="Garage1TOGGLE">
-                                                <rect key="frame" x="0.0" y="0.0" width="225" height="108.5"/>
+                                                <rect key="frame" x="0.0" y="94" width="225" height="82"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
@@ -48,13 +71,13 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYh-ac-3KJ" userLabel="SpacerView">
-                                                <rect key="frame" x="0.0" y="108.5" width="225" height="10"/>
+                                                <rect key="frame" x="0.0" y="176" width="225" height="10"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="10" id="t2m-Z8-Czq"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TW8-Vs-Sea" userLabel="Garage2TOGGLE">
-                                                <rect key="frame" x="0.0" y="118.5" width="225" height="108.5"/>
+                                                <rect key="frame" x="0.0" y="186" width="225" height="81.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -76,13 +99,13 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uso-Hw-Dsk" userLabel="SpacerView">
-                                                <rect key="frame" x="0.0" y="227" width="225" height="10"/>
+                                                <rect key="frame" x="0.0" y="267.5" width="225" height="10"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="10" id="r3o-d3-lRm"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5I1-Ae-epl" userLabel="RequestSTATUS">
-                                                <rect key="frame" x="0.0" y="237" width="225" height="109"/>
+                                                <rect key="frame" x="0.0" y="277.5" width="225" height="81.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.53119574652777779" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -104,7 +127,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jF-ET-7nl">
-                                                <rect key="frame" x="0.0" y="346" width="225" height="54"/>
+                                                <rect key="frame" x="0.0" y="359" width="225" height="41"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -112,6 +135,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="5I1-Ae-epl" firstAttribute="height" secondItem="TW8-Vs-Sea" secondAttribute="height" id="2LD-Yn-2Nx"/>
+                                            <constraint firstItem="V8B-ba-w3O" firstAttribute="height" secondItem="TW8-Vs-Sea" secondAttribute="height" multiplier="1.02985" id="Dbs-RY-I3L"/>
                                             <constraint firstItem="o2G-iV-9bn" firstAttribute="height" secondItem="TW8-Vs-Sea" secondAttribute="height" id="bwn-1x-eZP"/>
                                             <constraint firstItem="TW8-Vs-Sea" firstAttribute="height" secondItem="0jF-ET-7nl" secondAttribute="height" multiplier="2" id="cit-51-M6q"/>
                                         </constraints>
@@ -142,6 +166,7 @@
                     <tabBarItem key="tabBarItem" title="Publish" image="second" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="PanelView" destination="z5P-K9-Kec" id="3eN-Hu-eha"/>
+                        <outlet property="bluetoothEnable" destination="V8B-ba-w3O" id="g55-Ec-rHQ"/>
                         <outlet property="garage1TOGGLE" destination="o2G-iV-9bn" id="PN5-xu-GP3"/>
                         <outlet property="garage2TOGGLE" destination="TW8-Vs-Sea" id="eWO-ny-eSH"/>
                         <outlet property="statusLabel" destination="0jF-ET-7nl" id="nO7-NA-ABA"/>
