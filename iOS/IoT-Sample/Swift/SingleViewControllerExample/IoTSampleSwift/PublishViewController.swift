@@ -247,7 +247,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
 
         connectIoT()
         
-        iotDataManager.subscribe(toTopic: topic, qoS: .messageDeliveryAttemptedAtMostOnce, messageCallback: {
+        iotDataManager.subscribe(toTopic: topic, qoS: .messageDeliveryAttemptedAtLeastOnce, messageCallback: {
             (payload) ->Void in
             let stringValue = String(describing: NSString(data: payload, encoding: String.Encoding.utf8.rawValue)!)
 
@@ -312,7 +312,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
         
         if distanceToHome < homeDistanceThresh {
             let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
-            iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+            iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtLeastOnce)
             indicatorLabel.text = "Within Distance Threshold, passed \(buttonState) to \(gpioNum)"
         }
         else {
@@ -325,7 +325,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate {
     func sendGarageStatusCommandWith(buttonState: String, gpioNum: Int, indicatorLabel: UILabel) {
         
         let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
-        iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtMostOnce)
+        iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtLeastOnce)
 
         timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
     }
