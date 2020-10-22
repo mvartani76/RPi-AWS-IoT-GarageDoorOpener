@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>App uses Bluetooth to connect to the Peripheral</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>App uses Bluetooth to connect to the Peripheral</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>CourierPrime-Regular.ttf</string>
+		<string>CourierPrime-Bold.ttf</string>
+		<string>CourierPrime-Italic.ttf</string>
+		<string>CourierPrime-BoldItalic.ttf</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>mygarageapp</string>
 	<key>CFBundleExecutable</key>
