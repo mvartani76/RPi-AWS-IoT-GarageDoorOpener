@@ -482,12 +482,24 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
     }
     @IBAction func wasGarageTOGGLEButton1Pressed(_ sender: UIButton) {
         sender.pulsate()
+        // If the Bluetooth is enabled, send commands via BLE as opposed to AWS
+        if bluetoothButtonEnabled {
+            statusLabel.text = "Sending BT 1 Toggle"
+            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(135)]))
+        } else {
         sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton1_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
+        }
     }
     
     @IBAction func wasGarageTOGGLEButton2Pressed(_ sender: UIButton) {
         sender.pulsate()
-        sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton2_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
+        // If the Bluetooth is enabled, send commands via BLE as opposed to AWS
+        if bluetoothButtonEnabled {
+            statusLabel.text = "Sending BT 2 Toggle"
+            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(135)]))
+        } else {
+            sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton2_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
+        }
     }
     
     @IBAction func wasRequestSTATUSButtonPressed(_ sender: UIButton) {
@@ -502,21 +514,16 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
     }
     
     func sendGarageToggleCommandWith(buttonState: String, gpioNum: Int, homeDistanceThresh: Double, indicatorLabel: UILabel) {
-        // If the Bluetooth is enabled, send commands via BLE as opposed to AWS
-        if bluetoothButtonEnabled {
-            indicatorLabel.text = "Sending BT Toggle"
-            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(135)]))
-        } else {
-            guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
 
-            if distanceToHome < homeDistanceThresh {
-                let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
-                iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtLeastOnce)
+        guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
+
+        if distanceToHome < homeDistanceThresh {
+            let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
+            iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtLeastOnce)
                 indicatorLabel.text = "Within Distance Threshold, passed \(buttonState) to \(gpioNum)"
-            }
-            else {
-                indicatorLabel.text = "Outside of Distance Threshold. Garage command not sent."
-            }
+        }
+        else {
+            indicatorLabel.text = "Outside of Distance Threshold. Garage command not sent."
         }
         
         timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
