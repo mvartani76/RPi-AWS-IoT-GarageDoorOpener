@@ -57,6 +57,13 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
     // Characteristics
     private var paramsChar: [CBCharacteristic?] = []
 
+    // Characteristics
+    private var param1Char: CBCharacteristic?
+    private var param2Char: CBCharacteristic?
+    private var param3Char: CBCharacteristic?
+    private var paramButtonChar: CBCharacteristic?
+    private var txChar: CBCharacteristic?
+
     var charArray: [String] = [""]
 
     // If we're powered on, start scanning
@@ -132,14 +139,19 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
             for characteristic in characteristics {
                 if characteristic.uuid == Peripheral.param1CharacteristicUUID {
                     print("Param 1 characteristic found")
+                    param1Char = characteristic
                 } else if characteristic.uuid == Peripheral.param2CharacteristicUUID {
                     print("Param 2 characteristic found")
+                    param2Char = characteristic
                 } else if characteristic.uuid == Peripheral.param3CharacteristicUUID {
                     print("Param 3 characteristic found");
+                    param3Char = characteristic
                 } else if characteristic.uuid == Peripheral.paramButtonCharacteristicUUID {
                     print("Param Button characteristic found");
+                    paramButtonChar = characteristic
                 } else if characteristic.uuid == Peripheral.txCharacteristicUUID {
                     print("Tx characteristic found")
+                    txChar = characteristic
                     peripheral.setNotifyValue(true, for: characteristic)
                 }
             }
@@ -457,6 +469,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
                 sender.setTitle("Try Again", for: .normal)
                 sender.layer.borderColor = UIColor.red.cgColor
                 sender.layer.borderWidth = 5
+                bluetoothButtonEnabled = false
             }
         } else {
             bluetoothButtonEnabled = false
@@ -479,21 +492,31 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
     
     @IBAction func wasRequestSTATUSButtonPressed(_ sender: UIButton) {
         sender.shrink()
-        sendGarageStatusCommandWith(buttonState: "REQUEST_STATUS", gpioNum: RequestSTATUSButton_GPIO, indicatorLabel: statusLabel)
-        //sender.expand()
+        if bluetoothButtonEnabled {
+            statusLabel.text = "Sending BT Status"
+            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(100)]))
+        } else {
+            sendGarageStatusCommandWith(buttonState: "REQUEST_STATUS", gpioNum: RequestSTATUSButton_GPIO, indicatorLabel: statusLabel)
+            //sender.expand()
+        }
     }
     
     func sendGarageToggleCommandWith(buttonState: String, gpioNum: Int, homeDistanceThresh: Double, indicatorLabel: UILabel) {
-        
-        guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
-        
-        if distanceToHome < homeDistanceThresh {
-            let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
-            iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtLeastOnce)
-            indicatorLabel.text = "Within Distance Threshold, passed \(buttonState) to \(gpioNum)"
-        }
-        else {
-            indicatorLabel.text = "Outside of Distance Threshold. Garage command not sent."
+        // If the Bluetooth is enabled, send commands via BLE as opposed to AWS
+        if bluetoothButtonEnabled {
+            indicatorLabel.text = "Sending BT Toggle"
+            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(135)]))
+        } else {
+            guard let distanceToHome = locationManager.location?.distance(from: homeLocation) else { return }
+
+            if distanceToHome < homeDistanceThresh {
+                let iotDataManager = AWSIoTDataManager(forKey: ASWIoTDataManager)
+                iotDataManager.publishString("{\"state\":{\"reported\":{\"ON_OFF\":\"\(buttonState)\",\"GPIO\":\(gpioNum)}}}", onTopic:"Garage", qoS:.messageDeliveryAttemptedAtLeastOnce)
+                indicatorLabel.text = "Within Distance Threshold, passed \(buttonState) to \(gpioNum)"
+            }
+            else {
+                indicatorLabel.text = "Outside of Distance Threshold. Garage command not sent."
+            }
         }
         
         timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
