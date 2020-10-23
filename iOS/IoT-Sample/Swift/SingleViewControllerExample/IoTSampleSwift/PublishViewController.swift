@@ -485,7 +485,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         // If the Bluetooth is enabled, send commands via BLE as opposed to AWS
         if bluetoothButtonEnabled {
             statusLabel.text = "Sending BT 1 Toggle"
-            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(135)]))
+            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(Garage1Toggle_BTValue)]))
         } else {
         sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton1_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
         }
@@ -496,7 +496,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         // If the Bluetooth is enabled, send commands via BLE as opposed to AWS
         if bluetoothButtonEnabled {
             statusLabel.text = "Sending BT 2 Toggle"
-            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(135)]))
+            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(Garage2Toggle_BTValue)]))
         } else {
             sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton2_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
         }
@@ -506,7 +506,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         sender.shrink()
         if bluetoothButtonEnabled {
             statusLabel.text = "Sending BT Status"
-            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(100)]))
+            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(RequestGarageStatus_BTValue)]))
         } else {
             sendGarageStatusCommandWith(buttonState: "REQUEST_STATUS", gpioNum: RequestSTATUSButton_GPIO, indicatorLabel: statusLabel)
             //sender.expand()

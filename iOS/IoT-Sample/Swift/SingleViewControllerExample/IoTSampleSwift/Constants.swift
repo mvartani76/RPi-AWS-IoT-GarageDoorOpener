@@ -33,3 +33,7 @@ let GarageTOGGLEButton2_GPIO = 27
 let RequestSTATUSButton_GPIO = 22
 
 let HomeDistanceThresh = 200.0
+
+let Garage1Toggle_BTValue = 25
+let Garage2Toggle_BTValue = 50
+let RequestGarageStatus_BTValue = 75
