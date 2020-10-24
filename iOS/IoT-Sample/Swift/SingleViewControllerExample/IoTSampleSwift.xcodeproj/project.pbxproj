@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		221413BB24022F1C0001170A /* button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221413BA24022F1C0001170A /* button.swift */; };
 		221413BD2404C4D40001170A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 221413BC2404C4D40001170A /* logo.png */; };
+		226020512415EEF5000499C1 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 226020502415EEF5000499C1 /* Fonts */; };
+		22D2BBCE253FCC7600D55CF6 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2BBCD253FCC7600D55CF6 /* Peripheral.swift */; };
 		22DDBA3823CADFCD00C500FF /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 22DDBA3723CADFCD00C500FF /* awsconfiguration.json */; };
 		22DDBA3A23CB9A3000C500FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22DDBA3923CB9A3000C500FF /* GoogleService-Info.plist */; };
 		7486623E92C73858C0A0F2F8 /* Pods_IoTSampleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32F1D99230C34735307AD0 /* Pods_IoTSampleSwift.framework */; };
@@ -26,7 +28,9 @@
 		19CC868788E3FB2186476009 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		221413BA24022F1C0001170A /* button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button.swift; sourceTree = "<group>"; };
 		221413BC2404C4D40001170A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		226020502415EEF5000499C1 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		227C838923C66DF3007BC6A9 /* IoTSampleSwift.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = IoTSampleSwift.entitlements; sourceTree = "<group>"; };
+		22D2BBCD253FCC7600D55CF6 /* Peripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
 		22DDBA3723CADFCD00C500FF /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		22DDBA3923CB9A3000C500FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "IoTSampleSwift/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B90C03514D3F9F7EDF1FF45 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,12 +92,14 @@
 				A6867C931BF530A700956B68 /* Constants.swift */,
 				A6B39BB41BF3A93600045F73 /* AppDelegate.swift */,
 				A6B39BB81BF3A93600045F73 /* PublishViewController.swift */,
+				22D2BBCD253FCC7600D55CF6 /* Peripheral.swift */,
 				227C838923C66DF3007BC6A9 /* IoTSampleSwift.entitlements */,
 				A6B39BBA1BF3A93600045F73 /* Main.storyboard */,
 				221413BA24022F1C0001170A /* button.swift */,
 				A6B39BBD1BF3A93600045F73 /* Assets.xcassets */,
 				221413BC2404C4D40001170A /* logo.png */,
 				A6B39BBF1BF3A93600045F73 /* LaunchScreen.storyboard */,
+				226020502415EEF5000499C1 /* Fonts */,
 				A62CEE591BF3AEA500E9C895 /* Supporting Files */,
 			);
 			path = IoTSampleSwift;
@@ -151,7 +157,7 @@
 				TargetAttributes = {
 					A6B39BB01BF3A93600045F73 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = K79TKW9544;
+						DevelopmentTeam = T7989D5FN5;
 						LastSwiftMigration = 1000;
 					};
 				};
@@ -184,6 +190,7 @@
 				221413BD2404C4D40001170A /* logo.png in Resources */,
 				22DDBA3A23CB9A3000C500FF /* GoogleService-Info.plist in Resources */,
 				A6B39BBE1BF3A93600045F73 /* Assets.xcassets in Resources */,
+				226020512415EEF5000499C1 /* Fonts in Resources */,
 				A6B39BBC1BF3A93600045F73 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D2BBCE253FCC7600D55CF6 /* Peripheral.swift in Sources */,
 				A6867C941BF530A700956B68 /* Constants.swift in Sources */,
 				A6B39BB91BF3A93600045F73 /* PublishViewController.swift in Sources */,
 				A6B39BB51BF3A93600045F73 /* AppDelegate.swift in Sources */,
@@ -390,7 +398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IoTSampleSwift/IoTSampleSwift.entitlements;
 				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = K79TKW9544;
+				DEVELOPMENT_TEAM = T7989D5FN5;
 				INFOPLIST_FILE = IoTSampleSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -409,7 +417,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IoTSampleSwift/IoTSampleSwift.entitlements;
 				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = K79TKW9544;
+				DEVELOPMENT_TEAM = T7989D5FN5;
 				INFOPLIST_FILE = IoTSampleSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
