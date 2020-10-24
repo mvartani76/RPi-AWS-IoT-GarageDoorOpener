@@ -55,13 +55,10 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
     private var peripheral: CBPeripheral!
 
     // Characteristics
-    private var paramsChar: [CBCharacteristic?] = []
-
-    // Characteristics
-    private var param1Char: CBCharacteristic?
-    private var param2Char: CBCharacteristic?
-    private var param3Char: CBCharacteristic?
-    private var paramButtonChar: CBCharacteristic?
+    private var toggleGarage1Char: CBCharacteristic?
+    private var toggleGarage2Char: CBCharacteristic?
+    private var requestGarage1StatusChar: CBCharacteristic?
+    private var requestGarage2StatusChar: CBCharacteristic?
     private var txChar: CBCharacteristic?
 
     var charArray: [String] = [""]
@@ -122,10 +119,10 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
                     print("Param service found")
                     //Now kick off discovery of characteristics
                     peripheral.discoverCharacteristics([
-                        Peripheral.param1CharacteristicUUID,
-                        Peripheral.param2CharacteristicUUID,
-                        Peripheral.param3CharacteristicUUID,
-                        Peripheral.paramButtonCharacteristicUUID,
+                        Peripheral.toggleGarage1CharacteristicUUID,
+                        Peripheral.toggleGarage2CharacteristicUUID,
+                        Peripheral.requestGarage1StatusCharacteristicUUID,
+                        Peripheral.requestGarage2StatusCharacteristicUUID,
                         Peripheral.txCharacteristicUUID], for: service)
                     return
                 }
@@ -137,18 +134,18 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if let characteristics = service.characteristics {
             for characteristic in characteristics {
-                if characteristic.uuid == Peripheral.param1CharacteristicUUID {
-                    print("Param 1 characteristic found")
-                    param1Char = characteristic
-                } else if characteristic.uuid == Peripheral.param2CharacteristicUUID {
-                    print("Param 2 characteristic found")
-                    param2Char = characteristic
-                } else if characteristic.uuid == Peripheral.param3CharacteristicUUID {
-                    print("Param 3 characteristic found");
-                    param3Char = characteristic
-                } else if characteristic.uuid == Peripheral.paramButtonCharacteristicUUID {
-                    print("Param Button characteristic found");
-                    paramButtonChar = characteristic
+                if characteristic.uuid == Peripheral.toggleGarage1CharacteristicUUID {
+                    print("Toggle Garage 1 characteristic found")
+                    toggleGarage1Char = characteristic
+                } else if characteristic.uuid == Peripheral.toggleGarage2CharacteristicUUID {
+                    print("Toggle Garage 2 characteristic found")
+                    toggleGarage2Char = characteristic
+                } else if characteristic.uuid == Peripheral.requestGarage1StatusCharacteristicUUID {
+                    print("Request Garage 1 Status characteristic found");
+                    requestGarage1StatusChar = characteristic
+                } else if characteristic.uuid == Peripheral.requestGarage2StatusCharacteristicUUID {
+                    print("Request Garage 2 Status characteristic found");
+                    requestGarage1StatusChar = characteristic
                 } else if characteristic.uuid == Peripheral.txCharacteristicUUID {
                     print("Tx characteristic found")
                     txChar = characteristic
@@ -162,14 +159,14 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic,
                     error: Error?) {
         switch characteristic.uuid {
-            case Peripheral.param1CharacteristicUUID:
-                print("Param1 value = \(String(describing: characteristic.value))")
-            case Peripheral.param2CharacteristicUUID:
-                print("Param1 value = \(String(describing: characteristic.value))")
-            case Peripheral.param3CharacteristicUUID:
-                print("Param3 value = \(String(describing: characteristic.value))")
-            case Peripheral.paramButtonCharacteristicUUID:
-                print("ParamButton value = \(String(describing: characteristic.value))")
+            case Peripheral.toggleGarage1CharacteristicUUID:
+                print("Toggle Garage 1 value = \(String(describing: characteristic.value))")
+            case Peripheral.toggleGarage2CharacteristicUUID:
+                print("Toggle Garage 2 value = \(String(describing: characteristic.value))")
+            case Peripheral.requestGarage1StatusCharacteristicUUID:
+                print("Request Garage 1 Status value = \(String(describing: characteristic.value))")
+            case Peripheral.requestGarage2StatusCharacteristicUUID:
+            print("Request Garage 2 Status value = \(String(describing: characteristic.value))")
             case Peripheral.txCharacteristicUUID:
                 // values are coming over as bytes from the peripheral so need to convert to whatever expected data type
                 if let charStringTmp = String(bytes: characteristic.value!, encoding: .utf8) {
@@ -485,7 +482,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         // If the Bluetooth is enabled, send commands via BLE as opposed to AWS
         if bluetoothButtonEnabled {
             statusLabel.text = "Sending BT 1 Toggle"
-            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(Garage1Toggle_BTValue)]))
+            writeValueToChar( withCharacteristic: toggleGarage1Char!, withValue: Data([UInt8(Garage1Toggle_BTValue)]))
         } else {
         sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton1_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
         }
@@ -496,7 +493,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         // If the Bluetooth is enabled, send commands via BLE as opposed to AWS
         if bluetoothButtonEnabled {
             statusLabel.text = "Sending BT 2 Toggle"
-            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(Garage2Toggle_BTValue)]))
+            writeValueToChar( withCharacteristic: toggleGarage2Char!, withValue: Data([UInt8(Garage2Toggle_BTValue)]))
         } else {
             sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton2_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
         }
@@ -506,7 +503,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         sender.shrink()
         if bluetoothButtonEnabled {
             statusLabel.text = "Sending BT Status"
-            writeValueToChar( withCharacteristic: param1Char!, withValue: Data([UInt8(RequestGarageStatus_BTValue)]))
+            writeValueToChar( withCharacteristic: requestGarage1StatusChar!, withValue: Data([UInt8(RequestGarage1Status_BTValue)]))
         } else {
             sendGarageStatusCommandWith(buttonState: "REQUEST_STATUS", gpioNum: RequestSTATUSButton_GPIO, indicatorLabel: statusLabel)
             //sender.expand()

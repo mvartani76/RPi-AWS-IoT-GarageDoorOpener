@@ -36,4 +36,5 @@ let HomeDistanceThresh = 200.0
 
 let Garage1Toggle_BTValue = 25
 let Garage2Toggle_BTValue = 50
-let RequestGarageStatus_BTValue = 75
+let RequestGarage1Status_BTValue = 75
+let RequestGarage2Status_BTValue = 100
