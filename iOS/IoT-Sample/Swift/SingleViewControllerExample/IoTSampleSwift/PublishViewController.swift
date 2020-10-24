@@ -98,7 +98,8 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
     // Handler for disconnects
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
 
-        if peripheral == self.peripheral {
+        // Only try to rescan if the disconnect was not initiated by the user
+        if (peripheral == self.peripheral) && bluetoothButtonEnabled {
             print("Disconnected")
             // Set any GUI values to disabled here -- xxx.isEnabled = false
 
@@ -483,6 +484,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         if bluetoothButtonEnabled {
             statusLabel.text = "Sending BT 1 Toggle"
             writeValueToChar( withCharacteristic: toggleGarage1Char!, withValue: Data([UInt8(Garage1Toggle_BTValue)]))
+            timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
         } else {
         sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton1_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
         }
@@ -494,6 +496,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         if bluetoothButtonEnabled {
             statusLabel.text = "Sending BT 2 Toggle"
             writeValueToChar( withCharacteristic: toggleGarage2Char!, withValue: Data([UInt8(Garage2Toggle_BTValue)]))
+            timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
         } else {
             sendGarageToggleCommandWith(buttonState: "TOGGLE", gpioNum: GarageTOGGLEButton2_GPIO, homeDistanceThresh: HomeDistanceThresh, indicatorLabel: statusLabel)
         }
@@ -504,6 +507,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         if bluetoothButtonEnabled {
             statusLabel.text = "Sending BT Status"
             writeValueToChar( withCharacteristic: requestGarage1StatusChar!, withValue: Data([UInt8(RequestGarage1Status_BTValue)]))
+            timer = Timer.scheduledTimer(timeInterval: 4, target: self,   selector: (#selector(clearIndicatorLabel)), userInfo: nil, repeats: false)
         } else {
             sendGarageStatusCommandWith(buttonState: "REQUEST_STATUS", gpioNum: RequestSTATUSButton_GPIO, indicatorLabel: statusLabel)
             //sender.expand()
