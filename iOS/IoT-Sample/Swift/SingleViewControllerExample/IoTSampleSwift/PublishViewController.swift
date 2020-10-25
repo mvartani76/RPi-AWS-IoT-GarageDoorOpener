@@ -125,6 +125,9 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
                         Peripheral.requestGarage1StatusCharacteristicUUID,
                         Peripheral.requestGarage2StatusCharacteristicUUID,
                         Peripheral.txCharacteristicUUID], for: service)
+                    bluetoothEnable.setTitle("Connected", for: .normal)
+                    bluetoothEnable.layer.borderColor = UIColor.blue.cgColor
+                    bluetoothEnable.layer.borderWidth = 5
                     return
                 }
             }
@@ -459,7 +462,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
         if (bluetoothButtonEnabled == false) {
             if (bleReady) {
                 bluetoothButtonEnabled = true
-                sender.setTitle("Bluetooth Enabled", for: .normal)
+                sender.setTitle("Scanning for Peripherals", for: .normal)
                 print("Central scanning for", Peripheral.peripheralParamServiceUUID);
                 centralManager.scanForPeripherals(withServices: [Peripheral.peripheralParamServiceUUID],
                                                   options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
@@ -473,7 +476,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
             bluetoothButtonEnabled = false
             // Stop scanning
             self.centralManager.stopScan()
-            bluetoothEnable.setTitle("Enable Bluetooth", for: .normal)
+            bluetoothEnable.setTitle("Connect to BT", for: .normal)
             sender.layer.borderWidth = 0
         }
 
