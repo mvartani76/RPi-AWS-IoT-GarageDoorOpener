@@ -107,6 +107,8 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
 
             // Start scanning again
             print("Central scanning for", Peripheral.peripheralParamServiceUUID);
+            bluetoothEnable.setTitle("Scanning for Peripherals", for: .normal)
+            bluetoothEnable.layer.borderWidth = 0
             centralManager.scanForPeripherals(withServices: [Peripheral.peripheralParamServiceUUID],
                                               options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
         }
