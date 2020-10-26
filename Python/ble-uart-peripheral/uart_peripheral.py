@@ -6,6 +6,7 @@ from example_advertisement import register_ad_cb, register_ad_error_cb
 from example_gatt_server import Service, Characteristic
 from example_gatt_server import register_app_cb, register_app_error_cb
 import RPi.GPIO as GPIO
+import time
 
 BLUEZ_SERVICE_NAME =           'org.bluez'
 DBUS_OM_IFACE =                'org.freedesktop.DBus.ObjectManager'
@@ -26,6 +27,14 @@ REQUESTGARAGE2STATUS_BTVALUE = 100
 
 LOCAL_NAME = 'garagepi-gatt-server'
 mainloop = None
+
+def setup_GPIO():
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setwarnings(False)
+	GPIO.setup(17,GPIO.OUT, initial=True)
+	GPIO.setup(27,GPIO.OUT, initial=True)
+	GPIO.setup(22,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+	GPIO.output(17,GPIO.HIGH)
 
 class TxCharacteristic(Characteristic):
     def __init__(self, bus, index, service):
@@ -73,15 +82,17 @@ class RxCharacteristic(Characteristic):
 	print("uuid: %s value: %s " % (self.uuid, int8Value))
 
 	if int8Value == GARAGE1TOGGLE_BTVALUE:
-		print("Garage 1 open")
+		print("Garage 1 toggle")
 		GPIO.output(17, GPIO.LOW)
 		time.sleep(0.2)
 		GPIO.output(17, GPIO.HIGH)
+		time.sleep(3)
 	elif int8Value == GARAGE2TOGGLE_BTVALUE:
 		print("Garage 2 toggle")
 		GPIO.output(27, GPIO.LOW)
 		time.sleep(0.2)
 		GPIO.output(27, GPIO.HIGH)
+		time.sleep(3)
 	elif int8Value == REQUESTGARAGE1STATUS_BTVALUE:
 		print("garage 1 status")
 		GPIO.input(17)
@@ -146,6 +157,7 @@ def find_adapter(bus):
 
 def main():
     global mainloop
+    setup_GPIO()
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     bus = dbus.SystemBus()
     adapter = find_adapter(bus)
