@@ -74,14 +74,14 @@ class RxCharacteristic(Characteristic):
 
 	if int8Value == GARAGE1TOGGLE_BTVALUE:
 		print("Garage 1 open")
-		#GPIO.output(17, GPIO.LOW)
-		#time.sleep(0.2)
-		#GPIO.output(17, GPIO.HIGH)
+		GPIO.output(17, GPIO.LOW)
+		time.sleep(0.2)
+		GPIO.output(17, GPIO.HIGH)
 	elif int8Value == GARAGE2TOGGLE_BTVALUE:
 		print("Garage 2 toggle")
-		#GPIO.output(27, GPIO.LOW)
-		#time.sleep(0.2)
-		#GPIO.output(27, GPIO.HIGH)
+		GPIO.output(27, GPIO.LOW)
+		time.sleep(0.2)
+		GPIO.output(27, GPIO.HIGH)
 	elif int8Value == REQUESTGARAGE1STATUS_BTVALUE:
 		print("garage 1 status")
 		GPIO.input(17)
