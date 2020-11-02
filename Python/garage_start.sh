@@ -6,4 +6,5 @@ printf "\nDisabling WiFi Power Management...\n"
 
 # run Garage Door App using provided certificates
 printf "\nRunning Garage Door Application...\n"
-python $AWS_IOT_PYTHON_CMD_OPTIONS
+python $AWS_IOT_PYTHON_CMD_OPTIONS &
+python ./ble-uart-peripheral/uart_peripheral.py &
