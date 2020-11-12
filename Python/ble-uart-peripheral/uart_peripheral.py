@@ -74,6 +74,16 @@ class RxCharacteristic(Characteristic):
     def __init__(self, bus, index, param_uuid, service):
         Characteristic.__init__(self, bus, index, param_uuid,
                                 ['read','write','write-without-response','notify','authorize'], service)
+	self.notifying = False
+
+    def send_tx(self, s):
+        if not self.notifying:
+            return
+        value = []
+        for c in s:
+	    print(c)
+            value.append(dbus.Byte(c.encode()))
+        self.PropertiesChanged(GATT_CHRC_IFACE, {'Value': value}, [])
 
     def WriteValue(self, value, options):
 	# convert value into UInt8
@@ -95,12 +105,31 @@ class RxCharacteristic(Characteristic):
 		time.sleep(3)
 	elif int8Value == REQUESTGARAGE1STATUS_BTVALUE:
 		print("garage 1 status")
-		GPIO.input(17)
+		garagestatus = GPIO.input(17)
+		if garagestatus == 1:
+			self.send_tx("Garage 1 is Closed")
+		else:
+			self.send_tx("Garage 1 is Open")
 	elif int8Value == REQUESTGARAGE2STATUS_BTVALUE:
 		print("garage 2 status")
-		GPIO.input(27)
+		garagestatus = GPIO.input(27)
+		if garagestatus == 1:
+			self.send_tx("Garage 2 is Open")
+		else:
+			self.send_tx("Garage 2 is Closed")
+		TxCharacteristic.send_tx(garagestatus)
 	else:
 		print("Invalid Command.")
+
+    def StartNotify(self):
+        if self.notifying:
+            return
+        self.notifying = True
+
+    def StopNotify(self):
+        if not self.notifying:
+            return
+        self.notifying = False
 
 class UartService(Service):
     def __init__(self, bus, index):
