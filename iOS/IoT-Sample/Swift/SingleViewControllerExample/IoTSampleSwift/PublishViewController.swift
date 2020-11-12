@@ -149,9 +149,10 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
                 } else if characteristic.uuid == Peripheral.requestGarage1StatusCharacteristicUUID {
                     print("Request Garage 1 Status characteristic found");
                     requestGarage1StatusChar = characteristic
+                    peripheral.setNotifyValue(true, for: characteristic)
                 } else if characteristic.uuid == Peripheral.requestGarage2StatusCharacteristicUUID {
                     print("Request Garage 2 Status characteristic found");
-                    requestGarage1StatusChar = characteristic
+                    requestGarage2StatusChar = characteristic
                 } else if characteristic.uuid == Peripheral.txCharacteristicUUID {
                     print("Tx characteristic found")
                     txChar = characteristic
@@ -171,8 +172,22 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
                 print("Toggle Garage 2 value = \(String(describing: characteristic.value))")
             case Peripheral.requestGarage1StatusCharacteristicUUID:
                 print("Request Garage 1 Status value = \(String(describing: characteristic.value))")
+                // values are coming over as bytes from the peripheral so need to convert to whatever expected data type
+                if let charStringTmp = String(bytes: characteristic.value!, encoding: .utf8) {
+                    // In order to prevent all previous chars from being displayed, remove after each data reception
+                    charArray.removeAll()
+                    charArray.append(charStringTmp)
+                    if charArray.count >= 5 {
+                        charArray.remove(at: 0)
+                    }
+                    let stringPrint = charArray.joined(separator: "")
+
+                    statusLabel.text = stringPrint
+                } else {
+                    print("not a valid UTF-8 sequence")
+                }
             case Peripheral.requestGarage2StatusCharacteristicUUID:
-            print("Request Garage 2 Status value = \(String(describing: characteristic.value))")
+                print("Request Garage 2 Status value = \(String(describing: characteristic.value))")
             case Peripheral.txCharacteristicUUID:
                 // values are coming over as bytes from the peripheral so need to convert to whatever expected data type
                 if let charStringTmp = String(bytes: characteristic.value!, encoding: .utf8) {
@@ -182,7 +197,7 @@ class PublishViewController: UIViewController, CLLocationManagerDelegate, CBPeri
                     }
                     let stringPrint = charArray.joined(separator: "")
 
-                    //rxTextLabel.text = stringPrint
+                    statusLabel.text = stringPrint
                 } else {
                     print("not a valid UTF-8 sequence")
                 }
