@@ -32,7 +32,7 @@ AllowedActions = ['both', 'publish', 'subscribe']
 LCD_DISPLAY_DELAY = 3
 GARAGE_SHUT_VALUE = 1
 DISPLAY_TIMER_THRESHOLD = 10
-CODE_VERSION = "1.4"
+CODE_VERSION = "1.5"
 
 def get_ip_addr():
 	try:
@@ -80,10 +80,10 @@ def customCallback(client, userdata, message):
 			InitialGPIOSetup = False
 		json_msg = json.loads(message.payload.decode())
 		if json_msg["state"]["reported"]["ON_OFF"] == "ON":
-			print "GPIO HIGH"
+			print("GPIO HIGH")
 			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.HIGH)
 		elif json_msg["state"]["reported"]["ON_OFF"] == "OFF":
-			print "GPIO LOW"
+			print("GPIO LOW")
 			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.LOW)
 		elif json_msg["state"]["reported"]["ON_OFF"] == "TOGGLE":
 			lcd_block = True
@@ -95,7 +95,7 @@ def customCallback(client, userdata, message):
 			time.sleep(LCD_DISPLAY_DELAY)
 			lcd_block = False
 		elif json_msg["state"]["reported"]["ON_OFF"] == "REQUEST_STATUS":
-			print "GETTING STATUS"
+			print("GETTING STATUS")
 			lcd_block = True
 			mylcd.lcd_clear()
 			garagenumber = int(json_msg["state"]["reported"]["GPIO"])
