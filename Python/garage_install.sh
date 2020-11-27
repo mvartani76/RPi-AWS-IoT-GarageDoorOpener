@@ -94,6 +94,9 @@ printf "Installing python-dotenv libraries...\n"
 sudo pip install python-dotenv
 pip install python-dotenv
 
+sudo python3 -m pip install python-dotenv
+python3 -m pip install python-dotenv
+
 # Install I2C-Tools and SMBUS for LCD
 sudo apt-get install i2c-tools
 sudo apt-get install python-smbus
