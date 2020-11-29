@@ -4,7 +4,10 @@
 printf "\nDisabling WiFi Power Management...\n"
 /sbin/iwconfig wlan0 power off
 
-# run Garage Door App using provided certificates
+# run Garage Door App using provided certificate (included in python .env)s
 printf "\nRunning Garage Door Application...\n"
-python $AWS_IOT_PYTHON_CMD_OPTIONS &
-python ./ble-uart-peripheral/uart_peripheral.py &
+# just run the script with no parameters
+# parameters are included in python .env file
+python3 awsiot_garage.py &
+printf "\nRunning BLE UART peripheral application..\n"
+python3 ./ble-uart-peripheral/uart_peripheral.py &
