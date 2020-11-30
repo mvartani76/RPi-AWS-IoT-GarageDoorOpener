@@ -6,7 +6,9 @@ from example_advertisement import register_ad_cb, register_ad_error_cb
 from example_gatt_server import Service, Characteristic
 from example_gatt_server import register_app_cb, register_app_error_cb
 import RPi.GPIO as GPIO
+import i2c_lcd_driver
 import time
+from multiprocessing import shared_memory
 
 BLUEZ_SERVICE_NAME =           'org.bluez'
 DBUS_OM_IFACE =                'org.freedesktop.DBus.ObjectManager'
@@ -28,6 +30,8 @@ REQUESTGARAGE2STATUS_BTVALUE = 100
 LOCAL_NAME = 'garagepi-gatt-server'
 mainloop = None
 
+shm_gpio = shared_memory.SharedMemory(name="shared_gpio")
+
 def setup_GPIO():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
@@ -35,6 +39,20 @@ def setup_GPIO():
 	GPIO.setup(27,GPIO.OUT, initial=True)
 	GPIO.setup(22,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 	GPIO.output(17,GPIO.HIGH)
+
+# Need to define mylcd globally (or specifically not in main loop)
+# so the variable can be read inside other functions
+setup_GPIO()
+mylcd = i2c_lcd_driver.lcd()
+
+def GPIO_wait(section):
+        i = 0
+        while ((shm_gpio.buf[0] != 0) and (shm_gpio.buf[0] != 2)):
+                if ((i % 10000) == 0):
+                    print("ble waiting at " + str(section) + "... i = " + str(i) + " shm = " + str(shm_gpio.buf[0]))
+                i = i + 1
+        print("Exiting Wait... shm = " +str(shm_gpio.buf[0]))
+        shm_gpio.buf[0] = 2
 
 class TxCharacteristic(Characteristic):
     def __init__(self, bus, index, service):
@@ -91,35 +109,51 @@ class RxCharacteristic(Characteristic):
         int8Value = int(temp[0],0)
         print("uuid: %s value: %s " % (self.uuid, int8Value))
 
+        GPIO_wait("WriteValue")
+        # reserve gpio
+        shm_gpio.buf[0] = 2
+
         if int8Value == GARAGE1TOGGLE_BTVALUE:
             print("Garage 1 toggle")
+            mylcd.lcd_clear()
+            mylcd.lcd_display_string("Garage 1 toggle", 1)
             GPIO.output(17, GPIO.LOW)
             time.sleep(0.2)
             GPIO.output(17, GPIO.HIGH)
             time.sleep(3)
         elif int8Value == GARAGE2TOGGLE_BTVALUE:
             print("Garage 2 toggle")
+            mylcd.lcd_clear()
+            mylcd.lcd_display_string("Garage 2 toggle", 1)
             GPIO.output(27, GPIO.LOW)
             time.sleep(0.2)
             GPIO.output(27, GPIO.HIGH)
             time.sleep(3)
         elif int8Value == REQUESTGARAGE1STATUS_BTVALUE:
             print("garage 1 status")
+            mylcd.lcd_clear()
+            mylcd.lcd_display_string("Garage 1 Status", 1)
             garagestatus = GPIO.input(17)
             if garagestatus == 1:
                 self.send_tx("Garage 1 is Closed")
             else:
                 self.send_tx("Garage 1 is Open")
+            time.sleep(3)
         elif int8Value == REQUESTGARAGE2STATUS_BTVALUE:
             print("garage 2 status")
+            mylcd.lcd_clear()
+            mylcd.lcd_display_string("Garage 2 status", 1)
             garagestatus = GPIO.input(27)
             if garagestatus == 1:
                 self.send_tx("Garage 2 is Open")
             else:
                 self.send_tx("Garage 2 is Closed")
-            TxCharacteristic.send_tx(garagestatus)
+            time.sleep(3)
         else:
             print("Invalid Command.")
+        # clear lcd and free gpio
+        mylcd.lcd_clear()
+        shm_gpio.buf[0] = 0
 
     def StartNotify(self):
         if self.notifying:
@@ -195,7 +229,6 @@ def find_adapter(bus):
 
 def main():
     global mainloop
-    setup_GPIO()
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     bus = dbus.SystemBus()
     adapter = find_adapter(bus)
