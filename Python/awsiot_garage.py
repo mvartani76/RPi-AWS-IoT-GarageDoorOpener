@@ -26,6 +26,7 @@ import socket
 import fcntl
 import struct
 import os
+from multiprocessing import shared_memory
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -51,6 +52,15 @@ def setup_GPIO():
 	GPIO.setup(27,GPIO.OUT, initial=True)
 	GPIO.setup(22,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 	GPIO.output(17,GPIO.HIGH)
+
+def GPIO_wait(section):
+        i = 0
+        print("gpio buf = " + str(shm_gpio.buf[0]))
+        while ((shm_gpio.buf[0] != 0) and (shm_gpio.buf[0] != 1)):
+                if ((i % 1000) == 0):
+                    print("aws waiting at " + str(section) + "... i = " + str(i) + " shm = " + str(shm_gpio.buf[0]))
+                i = i + 1
+        print("Exiting Wait... shm = " +str(shm_gpio.buf[0]))
 
 def get_garage_status(garage_num):
 	return GPIO.input(garage_num)
@@ -88,16 +98,27 @@ def customCallback(client, userdata, message):
 			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.LOW)
 		elif json_msg["state"]["reported"]["ON_OFF"] == "TOGGLE":
 			lcd_block = True
+			# wait until the GPIO is free
+			GPIO_wait("json_toggle")
+			# reserve GPIO
+			shm_gpio.buf[0] = 1
 			mylcd.lcd_clear()
 			mylcd.lcd_display_string("Toggle "+str(json_msg["state"]["reported"]["GPIO"]), 1)
 			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.LOW)
 			time.sleep(0.2)
 			GPIO.output(int(json_msg["state"]["reported"]["GPIO"]),GPIO.HIGH)
 			time.sleep(LCD_DISPLAY_DELAY)
+			# free GPIO
+			print("json memory toggle free memory")
+			shm_gpio.buf[0] = 0
 			lcd_block = False
 		elif json_msg["state"]["reported"]["ON_OFF"] == "REQUEST_STATUS":
 			print("GETTING STATUS")
 			lcd_block = True
+			# wait until the GPIO is free
+			GPIO_wait("jsonRequestStatus")
+			# reserve GPIO
+			shm_gpio.buf[0] = 1
 			mylcd.lcd_clear()
 			garagenumber = int(json_msg["state"]["reported"]["GPIO"])
 			mylcd.lcd_display_string("Garage {} Status".format(garagenumber), 1)
@@ -109,6 +130,8 @@ def customCallback(client, userdata, message):
 				myAWSIoTMQTTClient.publish("Garage","{\"state\":{\"reported\":{\"ON_OFF\":\"UPDATE_STATUS\",\"DATA\":\"OPEN\"}}}",0)
 				mylcd.lcd_display_string("Open",2)
 			time.sleep(LCD_DISPLAY_DELAY)
+			# free GPIO
+			shm_gpio.buf[0] = 0
 			lcd_block = False
 
 # Read in command-line parameters
@@ -185,6 +208,15 @@ if args.mode == 'both' or args.mode == 'subscribe':
     myAWSIoTMQTTClient.subscribe(topic, 1, customCallback)
 time.sleep(2)
 
+# Initialize shared memory
+shm_gpio = shared_memory.SharedMemory(name="shared_gpio", create=True, size=1)
+#shm_gpio = shared_memory.SharedMemory(name="shared_gpio")
+
+# shm_gpio will contain either zero or non-zero integer
+# if 0, GPIO can be accessed as no other process accessing
+# non-zero integer will correspond to which process has control of GPIO
+shm_gpio.buf[0] = 1
+
 setup_GPIO()
 mylcd = i2c_lcd_driver.lcd()
 lcd_block = False
@@ -208,9 +240,15 @@ ip_timer = 0
 
 InitialGPIOSetup = True
 
+# free the GPIO for other processes
+shm_gpio.buf[0] = 0
+
 # The main loop just sleeps
 while True:
 	if lcd_block == False:
+		GPIO_wait("MainLoop")
+		# reserve GPIO memory
+		shm_gpio.buf[0] = 1
 		mylcd.lcd_display_string("Time: %s" %time.strftime("%H:%M:%S"), 1)
 		mylcd.lcd_display_string("Date: %s" %time.strftime("%m/%d/%Y"), 2)
 		time.sleep(1)
@@ -223,5 +261,7 @@ while True:
 			ip_timer = 0
 		else:
 			ip_timer = ip_timer + 1
+		# free GPIO memory
+		shm_gpio.buf[0] = 0
 	else:
 		time.sleep(2)
