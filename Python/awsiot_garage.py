@@ -34,7 +34,7 @@ AllowedActions = ['both', 'publish', 'subscribe']
 LCD_DISPLAY_DELAY = 3
 GARAGE_SHUT_VALUE = 1
 DISPLAY_TIMER_THRESHOLD = 10
-CODE_VERSION = "1.6"
+CODE_VERSION = "1.7"
 
 def get_ip_addr():
 	try:
