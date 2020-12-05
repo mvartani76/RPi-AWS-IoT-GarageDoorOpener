@@ -10,4 +10,5 @@ printf "\nRunning Garage Door Application...\n"
 # parameters are included in python .env file
 python3 awsiot_garage.py &
 printf "\nRunning BLE UART peripheral application..\n"
+sleep 5
 python3 ./ble-uart-peripheral/uart_peripheral.py &
