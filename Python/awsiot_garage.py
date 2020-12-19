@@ -36,6 +36,9 @@ GARAGE_SHUT_VALUE = 1
 DISPLAY_TIMER_THRESHOLD = 10
 CODE_VERSION = "1.7"
 
+# Initialize shared memory
+shm_gpio = shared_memory.SharedMemory(name="shared_gpio", create=True, size=1)
+
 def get_ip_addr():
 	try:
 		ip_addr = (([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")]
@@ -209,7 +212,7 @@ if args.mode == 'both' or args.mode == 'subscribe':
 time.sleep(2)
 
 # Initialize shared memory
-shm_gpio = shared_memory.SharedMemory(name="shared_gpio", create=True, size=1)
+#shm_gpio = shared_memory.SharedMemory(name="shared_gpio", create=True, size=1)
 #shm_gpio = shared_memory.SharedMemory(name="shared_gpio")
 
 # shm_gpio will contain either zero or non-zero integer
