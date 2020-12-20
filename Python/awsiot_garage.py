@@ -22,6 +22,7 @@ import argparse
 import json
 import RPi.GPIO as GPIO
 import i2c_lcd_driver
+import garage_modules
 import socket
 import fcntl
 import struct
@@ -55,15 +56,6 @@ def setup_GPIO():
 	GPIO.setup(27,GPIO.OUT, initial=True)
 	GPIO.setup(22,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 	GPIO.output(17,GPIO.HIGH)
-
-def GPIO_wait(section):
-        i = 0
-        print("gpio buf = " + str(shm_gpio.buf[0]))
-        while ((shm_gpio.buf[0] != 0) and (shm_gpio.buf[0] != 1)):
-                if ((i % 1000) == 0):
-                    print("aws waiting at " + str(section) + "... i = " + str(i) + " shm = " + str(shm_gpio.buf[0]))
-                i = i + 1
-        print("Exiting Wait... shm = " +str(shm_gpio.buf[0]))
 
 def get_garage_status(garage_num):
 	return GPIO.input(garage_num)
@@ -102,7 +94,7 @@ def customCallback(client, userdata, message):
 		elif json_msg["state"]["reported"]["ON_OFF"] == "TOGGLE":
 			lcd_block = True
 			# wait until the GPIO is free
-			GPIO_wait("json_toggle")
+			garage_modules.GPIO_wait("json_toggle", shm_gpio.buf[0])
 			# reserve GPIO
 			shm_gpio.buf[0] = 1
 			mylcd.lcd_clear()
@@ -119,7 +111,7 @@ def customCallback(client, userdata, message):
 			print("GETTING STATUS")
 			lcd_block = True
 			# wait until the GPIO is free
-			GPIO_wait("jsonRequestStatus")
+			garage_modules.GPIO_wait("jsonRequestStatus", shm_gpio.buf[0])
 			# reserve GPIO
 			shm_gpio.buf[0] = 1
 			mylcd.lcd_clear()
@@ -249,7 +241,7 @@ shm_gpio.buf[0] = 0
 # The main loop just sleeps
 while True:
 	if lcd_block == False:
-		GPIO_wait("MainLoop")
+		garage_modules.GPIO_wait("MainLoop", shm_gpio.buf[0])
 		# reserve GPIO memory
 		shm_gpio.buf[0] = 1
 		mylcd.lcd_display_string("Time: %s" %time.strftime("%H:%M:%S"), 1)

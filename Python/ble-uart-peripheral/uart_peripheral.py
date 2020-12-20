@@ -1,4 +1,5 @@
 import sys
+sys.path.append('..')
 import dbus, dbus.mainloop.glib
 from gi.repository import GLib
 from example_advertisement import Advertisement
@@ -7,6 +8,7 @@ from example_gatt_server import Service, Characteristic
 from example_gatt_server import register_app_cb, register_app_error_cb
 import RPi.GPIO as GPIO
 import i2c_lcd_driver
+import garage_modules
 import time
 from multiprocessing import shared_memory
 
@@ -44,15 +46,6 @@ def setup_GPIO():
 # so the variable can be read inside other functions
 setup_GPIO()
 mylcd = i2c_lcd_driver.lcd()
-
-def GPIO_wait(section):
-        i = 0
-        while ((shm_gpio.buf[0] != 0) and (shm_gpio.buf[0] != 2)):
-                if ((i % 10000) == 0):
-                    print("ble waiting at " + str(section) + "... i = " + str(i) + " shm = " + str(shm_gpio.buf[0]))
-                i = i + 1
-        print("Exiting Wait... shm = " +str(shm_gpio.buf[0]))
-        shm_gpio.buf[0] = 2
 
 class TxCharacteristic(Characteristic):
     def __init__(self, bus, index, service):
@@ -109,7 +102,7 @@ class RxCharacteristic(Characteristic):
         int8Value = int(temp[0],0)
         print("uuid: %s value: %s " % (self.uuid, int8Value))
 
-        GPIO_wait("WriteValue")
+        garage_modules.GPIO_wait("WriteValue", shm_gpio.buf[0])
         # reserve gpio
         shm_gpio.buf[0] = 2
 
